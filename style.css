@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+body {
+	margin: 0;
+	font-family: "Roboto", sans-serif;
+	background: #000;
+}
+.jumbo {
+	color: #fff;
+	overflow: hidden;
+	padding: 32px 0 64px 0;
+	text-align: center;
+}
+.jumbo h1 {
+	margin: 0 0 18px 0;
+}
+.jumbo h2 {
+	color: #bdbdbd;
+}
+.students_table {
+	display: inline-block;
+}
+
+.students_table td {
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+
+.students_table .students_images img {
+	width: 100px;
+	border-radius: 50%;
+}
+
+.students_table .students_numbers {
+	color: #bdbdbd;
+}
+
+.students_table .students_names {
+	font-size: 18px;
+}
+
+.main {
+	width: 900px;
+	margin: auto;
+	border-radius: 50px;
+	padding: 32px 56px;
+	margin-bottom: 32px;
+	background: #111;
+	box-sizing: border-box;
+}
+
+.section {
+	padding-bottom: 32px;
+	border-bottom: 1px solid #313131;
+}
+
+.section h2 {
+	color: #bbdefb;
+}
+
+.section a.active {
+	color: #e0e0e0;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.section a {
+	color: #9e9e9e;
+	padding: 6px 0;
+	text-decoration: none;
+	cursor: default;
+}
+
+.inner_section {
+	display: flex;
+	flex-direction: column;
+}
