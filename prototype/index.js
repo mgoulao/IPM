@@ -29,6 +29,28 @@ const dayToString = (day) => {
     return ret;
 }
 
+const dateToString = (date) => {        
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+}
+
+const hourToString = (date) => {
+    return `${date.getHours()}:${date.getMinutes()}`
+}
+
+class Clock {
+    constructor() {
+        this.elem = document.querySelector(".home");
+        this.hours = document.querySelector(".hours");
+        this.day = document.querySelector(".day");
+        this.date = document.querySelector(".date");
+        
+        let date = new Date();
+        this.hours.innerHTML = hourToString(date);
+        this.day.innerHTML = dayToString(date.getDay());
+        this.date.innerHTML = dateToString(date);
+    }
+}
+
 class Contacts {
 
     constructor() {
@@ -72,5 +94,6 @@ class Contacts {
 
 
 window.onload = () => {
+    let clock = new Clock();
     let contacts = new Contacts();
 }
