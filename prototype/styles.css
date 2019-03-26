@@ -10,7 +10,11 @@ body {
     margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6, span {
+div {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, span, p {
     margin: 0;
     padding: 0;
     color: #fff;
@@ -31,26 +35,43 @@ h1, h2, h3, h4, h5, h6, span {
     font-size: 100%;
     background: #000;
     border-radius: 16px;
+    overflow: hidden;
 }
 
 .main-menu {
+    position: absolute;
     max-width: 100%;
+    width: 100%;
     height: 100%;
     display: flex;
     overflow-x: auto;
 }
 
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow-y: auto;
+}
+
 .menu-item {
+    position: absolute;
     width: 6.5cm;
     min-width: 6.5cm;
     flex:1;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .home {
-    display: flex;
+    display: none;
     align-items: center;
+}
+
+.home.active {
+    display: flex;
 }
 
 .home h4 {
@@ -69,6 +90,13 @@ h1, h2, h3, h4, h5, h6, span {
 }
 
 /* Contacts */
+.contacts {
+    display: none;
+}
+
+.contacts.active {
+    display: block;
+}
 
 .contacts-header {
     display: flex;
@@ -113,6 +141,12 @@ h1, h2, h3, h4, h5, h6, span {
     background: #242424;
 }
 
+.list-btn {
+    width: 24px;
+    max-width: 24px;
+    display: flex;
+}
+
 .contacts-list span {
     flex: 1;
     text-align: center;
@@ -130,4 +164,41 @@ h1, h2, h3, h4, h5, h6, span {
     display: flex;
     margin: 3%  0 0 0;
     padding: 0;
+}
+
+/* Call screen */
+.call {
+    display: none;
+    flex-direction: column;
+    background: #000;
+    padding: 12px;
+}
+
+.call.active {
+    display: flex;
+}
+
+.call-name {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    padding-top: 18px;  
+}
+
+.end-call-btn {
+    width: 1cm;
+    height: 1cm;
+    background: red;
+    border-radius: 50%;
+    padding: 4px 0 0 0;
+    margin-bottom: 6px;
+    border: none;
+    outline: none;
+    align-self: center;
+    align-items: center;
+}
+
+.end-call-info {
+    align-self: center;
+    font-size: 0.75rem;
 }

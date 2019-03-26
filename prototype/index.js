@@ -29,12 +29,60 @@ const dayToString = (day) => {
     return ret;
 }
 
-const dateToString = (date) => {        
-    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+const dateToString = (date) => {
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
 const hourToString = (date) => {
-    return `${date.getHours()}:${date.getMinutes()}`
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    return `${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes}`;
+}
+
+class Swipe {
+    constructor() {
+        this.screens = ["home", "contacts"];
+        this.currentScreen = 0;
+        this.previousScreen = -1;
+
+        $(".main-menu").on("swipeleft", this.swipeRight.bind(this));
+        $(".main-menu").on("swiperight", this.swipeLeft.bind(this));
+    }
+
+    removeScreen() {
+        if (this.previousScreen == -1) return;
+
+        let previousScreenElem = document.querySelector(`.${this.screens[this.previousScreen]}`);
+        $(`.${this.screens[this.previousScreen]}`).fadeOut( 200, () => {
+            previousScreenElem.classList.remove("active");
+        });
+    }
+
+    showScreen() {
+        let currentScreenElem = document.querySelector(`.${this.screens[this.currentScreen]}`);
+        this.removeScreen();
+        $(`.${this.screens[this.currentScreen]}`).fadeIn( 300, () => {
+            currentScreenElem.classList.add("active");
+        });
+    }
+
+    swipeRight() {
+        this.previousScreen = this.currentScreen;
+        let a = this.currentScreen + 1;
+        let b = this.screens.length;
+        this.currentScreen = ((a % b) + b) % b;
+        this.showScreen();
+    }
+
+    swipeLeft() {
+        this.previousScreen = this.currentScreen;
+        let a = this.currentScreen - 1;
+        let b = this.screens.length;
+        this.currentScreen = ((a % b) + b) % b;
+        this.showScreen();
+    }
+
+
 }
 
 class Clock {
@@ -43,7 +91,7 @@ class Clock {
         this.hours = document.querySelector(".hours");
         this.day = document.querySelector(".day");
         this.date = document.querySelector(".date");
-        
+
         let date = new Date();
         this.hours.innerHTML = hourToString(date);
         this.day.innerHTML = dayToString(date.getDay());
@@ -96,4 +144,5 @@ class Contacts {
 window.onload = () => {
     let clock = new Clock();
     let contacts = new Contacts();
+    let swipe = new Swipe();
 }
