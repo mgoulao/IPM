@@ -53,7 +53,7 @@ class Swipe {
         if (this.previousScreen == -1) return;
 
         let previousScreenElem = document.querySelector(`.${this.screens[this.previousScreen]}`);
-        $(`.${this.screens[this.previousScreen]}`).fadeOut( 200, () => {
+        $(`.${this.screens[this.previousScreen]}`).fadeOut(200, () => {
             previousScreenElem.classList.remove("active");
         });
     }
@@ -61,7 +61,7 @@ class Swipe {
     showScreen() {
         let currentScreenElem = document.querySelector(`.${this.screens[this.currentScreen]}`);
         this.removeScreen();
-        $(`.${this.screens[this.currentScreen]}`).fadeIn( 300, () => {
+        $(`.${this.screens[this.currentScreen]}`).fadeIn(300, () => {
             currentScreenElem.classList.add("active");
         });
     }
@@ -99,18 +99,192 @@ class Clock {
     }
 }
 
+class AddContact {
+    constructor(contactScreen) {
+        this.waitingForResponse = false;
+        this.contactScreen = contactScreen;
+        this.setupListeners();
+        this.contacts = [
+            {
+                name: "Miguel",
+                id: "3",
+                location: false,
+                call: false
+            },
+            {
+                name: "João",
+                id: "4",
+                location: false,
+                call: false
+            }, {
+                name: "Paulo",
+                id: "5",
+                location: false,
+                call: false
+            }, {
+                name: "Afonso",
+                id: "6",
+                location: false,
+                call: false
+            }
+        ];
+        this.createContactsList();
+    }
+
+    createContactsList() {
+        let listElem = document.querySelector(".helper-contacts-list");
+        let res = "";
+        this.contacts.forEach((e) => {
+            res +=
+                `<li id="${e.id}">
+                    <h6>${e.name}</h6>
+                    <div class="helper-contact-permissions">
+                        <i class="material-icons">location_on</i>
+                        <input type="checkbox" name="locate" value="true">
+                        <i class="material-icons">phone</i>
+                        <input type="checkbox" name="call" value="true">
+                        <i class="material-icons helper-add-contact-btn">add</i>
+                    </div>
+                </li>`
+        });
+        listElem.innerHTML = res;
+    }
+
+    setupListeners() {
+        let locationBtn = document.getElementById("permission-location-btn");
+        let callBtn = document.getElementById("permission-call-btn");
+        let closeBtn = document.querySelector(".close-add-contacts-btn");
+        const callback = (e) => {
+            let btn = e.currentTarget;
+            if (btn.classList.contains("active")) {
+                btn.classList.remove("active");
+            } else {
+                btn.classList.add("active");
+            }
+        };
+        locationBtn.addEventListener("click", (e) => callback(e));
+        callBtn.addEventListener("click", (e) => callback(e));
+
+        closeBtn.addEventListener("click", this.close.bind(this));
+
+        $(document).on("change", ".helper-contact-permissions input[name='locate']", (e) => {
+            let id = e.originalEvent.path[2].getAttribute("id");
+            let checked = e.currentTarget.checked;
+            this.contacts.forEach((contact) => {
+                if (id === contact.id) {
+                    contact.location = checked;
+                }
+            });
+        });
+
+        $(document).on("change", ".helper-contact-permissions input[name='call']", (e) => {
+            let id = e.originalEvent.path[2].getAttribute("id");
+            let checked = e.currentTarget.checked;
+            this.contacts.forEach((contact) => {
+                if (id === contact.id) {
+                    contact.call = checked;
+                }
+            });
+        });
+
+        $(document).on("click", ".helper-add-contact-btn", (e) => {
+            let id = e.originalEvent.path[2].getAttribute("id");
+            if (this.waitingForResponse) {
+                let contact = this.getContact(id);
+                let index = this.contacts.indexOf(contact);
+                this.contactScreen.sendReponse(contact);
+                this.contacts.splice(index, 1);
+                this.createContactsList();
+                this.close();
+            }
+        });
+    }
+
+    startWaitingForResponse() {
+        this.waitingForResponse = true;
+    }
+
+    endWaitingForResponse() {
+        this.waitingForResponse = false;
+    }
+
+    open() {
+        let addContactScreenElem = document.querySelector(".add-contact");
+        addContactScreenElem.classList.add("active");
+        this.startWaitingForResponse();
+    }
+
+    close() {
+        let addContactScreenElem = document.querySelector(".add-contact");
+        addContactScreenElem.classList.remove("active");
+        this.endWaitingForResponse();
+    }
+
+    getContact(id) {
+        let res;
+        this.contacts.forEach((contact) => {
+            if (id === contact.id) {
+                res = contact;
+            }
+        });
+        return res;
+    }
+}
+
+class CallScreen {
+    constructor() {
+        this.setupListeners();
+    }
+
+    setupListeners() {
+        let endCallBtn = document.querySelector(".end-call-btn");
+
+        endCallBtn.addEventListener("mousedown", () => {
+            this.startTime = Date.now();
+        });
+
+        endCallBtn.addEventListener("mouseup", () => {
+            let time = Date.now() - this.startTime;
+            if (time > 1000) {
+                this.close();
+            }
+        });
+    }
+
+    open(contact) {
+        let callName = document.querySelector(".call-name");
+        let callScreen = document.querySelector(".call");
+        callName.innerHTML = contact.name;
+        callScreen.classList.add("active");
+    }
+
+    close() {
+        let callScreen = document.querySelector(".call");
+        callScreen.classList.remove("active");
+    }
+}
+
 class Contacts {
 
     constructor() {
         this.elem = document.querySelector(".contacts");
+        this.startTime = 0;
         this.setupListeners();
+        this.addContact = new AddContact(this);
+        this.callScreen = new CallScreen();
         this.list = [
             {
                 name: "Miguel",
-                id: "123",
+                id: "1",
                 call: true,
                 locate: true,
-            }
+            },
+            {
+                name: "Ana Maria",
+                id: "2",
+                call: true,
+                locate: true,
+            },
         ];
         this.createListElem();
     }
@@ -123,7 +297,7 @@ class Contacts {
                 <span>${e.name}</span>
                 <div class="list-btn-container">
                     <div class="list-btn">
-                        <i class="material-icons phone-btn">local_phone</i>
+                        ${e.call ? '<i class="material-icons phone-btn">local_phone</i>' : ''}
                     </div>
                 </div>
             </li>`;
@@ -132,10 +306,39 @@ class Contacts {
         let contactsList = document.querySelector(".contacts-list");
         contactsList.innerHTML = listElems;
     }
-    setupListeners() {
-        $(document).on('click', '.phone-btn', (e) => {
-            console.log(e.originalEvent.path[3]);
+
+    openCallScreen(id) {
+        this.list.forEach((e) => {
+            if (e.id === id) {
+                this.callScreen.open(e);
+            }
         });
+    }
+
+    openAddContactScreen() {
+        this.addContact.open();
+    }
+
+    closeAddContactScreen() {
+        this.addContact.close();
+    }
+
+
+    setupListeners() {
+        let addContactBtn = document.querySelector(".add-contact-btn");
+
+        $(document).on('click', '.phone-btn', (e) => {
+            this.openCallScreen(e.originalEvent.path[3].getAttribute("id"));
+        });
+
+        addContactBtn.addEventListener("click", () => {
+            this.openAddContactScreen();
+        });
+    }
+
+    sendReponse(contact) {
+        this.list.push(contact);
+        this.createListElem();
     }
 
 }

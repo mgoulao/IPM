@@ -10,6 +10,14 @@
 </head>
 
 <body>
+    <div class="helper">
+        <div class="helper-header"><span>iGo</span></div>
+        <div class="add-contact-helper">
+            <ul class="helper-contacts-list">
+                <!-- List -->
+            </ul>
+        </div>
+    </div>
     <div class="device">
         <div class="main-menu">
             <!-- <div class="menu-item places-finder">
@@ -26,6 +34,7 @@
             <div class="menu-item contacts">
                 <div class="contacts-header">
                     <span>Contacts</span>
+                    <i class="add-contact-btn material-icons">add</i>
                 </div>
                 <ul class="contacts-list">
                     <!-- List elems -->
@@ -42,18 +51,37 @@
                     <h6 class="date">
                         <!-- date -->
                     </h6>
+                    <button class="home-btn contacts-home-btn">
+                        <i class="material-icons">contacts</i>
+                    </button>
+                    <span class="home-info">slide sideways</span>
                 </div>
             </div>
         </div>
         <div class="overlay call">
-            <h5 class="call-name">Manel</h5>
+            <h5 class="call-name">
+                <!-- Name -->
+            </h5>
             <button class="end-call-btn">
                 <i class="material-icons">call_end</i>
             </button>
             <p class="end-call-info">Press and Hold</p>
         </div>
+        <div class="overlay add-contact">
+            <i class="material-icons close-add-contacts-btn">close</i>
+            <div class="add-contact-permissions">
+                <button class="permission-btn" id="permission-location-btn">
+                    <i class="material-icons">location_on</i>
+                </button>
+                <button class="permission-btn" id="permission-call-btn">
+                    <i class="material-icons">phone</i>
+                </button>
+            </div>
+            <p class="add-contact-info">Keep both iGo's close</p>
+        </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
     <script src="./index.js"></script>
 </body>
 
