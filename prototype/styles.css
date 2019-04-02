@@ -278,6 +278,24 @@ h1, h2, h3, h4, h5, h6, span, p {
 	transform: translateX(-50%);
 }
 
+.weather {
+	display: flex;
+	justify-content: center;
+	margin-top: -14px;
+}
+
+.weather i {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	margin-right: 6px;
+	color: #ffe168;
+}
+
+.weather span {
+	padding-top: 1px;
+}
+
 /* Contacts */
 
 .contacts {
