@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 html {
-    font-family: "Roboto", sans-serif;
-    font-weight: 100;
-    user-select: none;
+	font-family: "Roboto", sans-serif;
+	font-weight: 100;
+	user-select: none;
 }
 
 body {
-    margin: 0;
+	margin: 0;
 }
 
 div {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6, span, p {
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    font-weight: normal;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font-weight: normal;
 }
 
 /* ScrollBar */
@@ -25,527 +25,527 @@ h1, h2, h3, h4, h5, h6, span, p {
 /* width */
 
 .device ::-webkit-scrollbar {
-    width: 12px;
-    background: transparent;
+	width: 12px;
+	background: transparent;
 }
 
 /* Track */
 
 .device ::-webkit-scrollbar-track {
-    background: transparent;
-    height: 80px;
+	background: transparent;
+	height: 80px;
 }
 
 /* Handle */
 
 .device ::-webkit-scrollbar-thumb {
-    background-clip: padding-box;
-    border: 4px solid rgba(0, 0, 0, 0);
-    background-color: rgba(228, 228, 228, 1);
-    border-radius: 50px;
-    height: 6px;
-    margin: 0 4px;
+	background-clip: padding-box;
+	border: 4px solid rgba(0, 0, 0, 0);
+	background-color: rgba(228, 228, 228, 1);
+	border-radius: 50px;
+	height: 6px;
+	margin: 0 4px;
 }
 
 /* Handle on hover */
 
 .device ::-webkit-scrollbar-button {
-    background: transparent;
+	background: transparent;
 }
 
 .device ::-webkit-scrollbar-corner {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 .ui-loader {
-    display: none;
+	display: none;
 }
 
 .ui-page {
-    min-height: 100% !important;
-    /*Removes border created*/
+	min-height: 100% !important;
+	/*Removes border created*/
 }
 
 .material-icons, li {
-    color: #fff;
+	color: #fff;
 }
 
 /* Helper */
 
 .helper {
-    position: absolute;
-    top: 0;
-    width: calc(100% - 16px);
-    height: auto;
-    background: #f2f2f2;
-    margin: 8px;
-    border-radius: 14px;
+	position: absolute;
+	top: 0;
+	width: calc(100% - 16px);
+	height: auto;
+	background: #f2f2f2;
+	margin: 8px;
+	border-radius: 14px;
 }
 
 .helper-header {
-    background-image: url("./resources/notch-collectibles.png");
-    background-repeat: no-repeat;
-    background-position-x: center;
-    height: 35px;
-    background-size: 140px;
-    text-align: center;
+	background-image: url("./resources/notch-collectibles.png");
+	background-repeat: no-repeat;
+	background-position-x: center;
+	height: 35px;
+	background-size: 140px;
+	text-align: center;
 }
 
 .helper-header span {
-    color: #212121;
-    font-size: 1.5rem;
+	color: #212121;
+	font-size: 1.5rem;
 }
 
 .helper-contacts-list {
-    height: 120px;
-    overflow-y: auto;
-    list-style: none;
-    margin: 20px 24px;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-row-gap: 20px;
-    grid-column-gap: 20px;
+	height: 120px;
+	overflow-y: auto;
+	list-style: none;
+	margin: 20px 24px;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-row-gap: 20px;
+	grid-column-gap: 20px;
 }
 
 .helper-contacts-list li {
-    display: flex;
-    align-items: center;
-    background: #fbfbfb;
-    border-radius: 12px;
-    padding: 10px 12px;
+	display: flex;
+	align-items: center;
+	background: #fbfbfb;
+	border-radius: 12px;
+	padding: 10px 12px;
 }
 
 .helper-contacts-list h6 {
-    color: #212121;
-    font-size: 0.9rem;
-    flex: 1;
+	color: #212121;
+	font-size: 0.9rem;
+	flex: 1;
 }
 
 .helper-contact-permissions {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .helper-contact-permissions i {
-    color: #656565;
-    font-size: 22px;
+	color: #656565;
+	font-size: 22px;
 }
 
 .helper-contact-permissions .helper-add-contact-btn {
-    color: #fff;
-    cursor: pointer;
-    background: #1565C0;
-    padding: 4px;
-    margin-left: 8px;
-    border-radius: 50%;
+	color: #fff;
+	cursor: pointer;
+	background: #1565C0;
+	padding: 4px;
+	margin-left: 8px;
+	border-radius: 50%;
 }
 
 .helper-contact-permissions .helper-add-message-btn {
-    color: #fff;
-    cursor: pointer;
-    background: #D50000;
-    padding: 4px;
-    margin-left: 8px;
-    border-radius: 50%;
+	color: #fff;
+	cursor: pointer;
+	background: #D50000;
+	padding: 4px;
+	margin-left: 8px;
+	border-radius: 50%;
 }
 
 .helper-add-contact {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 /* Device */
 
 .device {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 6.5cm;
-    height: 4cm;
-    font-size: 100%;
-    background: #000;
-    border-radius: 16px;
-    overflow: hidden;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 6.5cm;
+	height: 4cm;
+	font-size: 100%;
+	background: #000;
+	border-radius: 16px;
+	overflow: hidden;
 }
 
 .main-menu {
-    position: absolute;
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow-x: auto;
+	position: absolute;
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	overflow-x: auto;
 }
 
 .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    overflow-y: auto;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	overflow-y: auto;
 }
 
 .menu-item {
-    position: absolute;
-    width: 6.5cm;
-    min-width: 6.5cm;
-    flex: 1;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+	position: absolute;
+	width: 6.5cm;
+	min-width: 6.5cm;
+	flex: 1;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .home {
-    display: none;
-    align-items: center;
+	display: none;
+	align-items: center;
 }
 
 .home.active {
-    display: flex;
+	display: flex;
 }
 
 .home h4 {
-    font-size: 3rem;
-    font-weight: bold;
+	font-size: 3rem;
+	font-weight: bold;
 }
 
 .home h6 {
-    font-size: 1rem;
-    color: #BDBDBD
+	font-size: 1rem;
+	color: #BDBDBD
 }
 
 .home .menu-item-container {
-    text-align: center;
-    margin: auto;
+	text-align: center;
+	margin: auto;
 }
 
 .contacts-home-btn {
-    left: 8px;
+	left: 8px;
 }
 
 .contacts-home-btn.highlight {
-    background: #AEEA00
+	background: #AEEA00
 }
 
 .contacts-home-btn.highlight i {
-    color: #212121;
+	color: #212121;
 }
 
 .places-home-btn {
-    right: 8px;
+	right: 8px;
 }
 
 .home-btn {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    bottom: 8px;
-    padding: 0;
-    border-radius: 50%;
-    background: #242424;
-    border: none;
-    outline: none;
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	bottom: 8px;
+	padding: 0;
+	border-radius: 50%;
+	background: #242424;
+	border: none;
+	outline: none;
 }
 
 .home-btn i {
-    width: 14px;
-    height: 14px;
-    font-size: 14px;
-    line-height: 24px;
-    color: #737373;
+	width: 14px;
+	height: 14px;
+	font-size: 14px;
+	line-height: 24px;
+	color: #737373;
 }
 
 .pedro-icon {
-    width: 16px;
-    height: 16px;
+	width: 16px;
+	height: 16px;
 }
 
 .pedro-icon path {
-    color: #737373;
-    fill: #737373;
+	color: #737373;
+	fill: #737373;
 }
 
 .home-info {
-    position: absolute;
-    bottom: 8px;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #565656;
-    left: 50%;
-    display: flex;
-    transform: translateX(-50%);
+	position: absolute;
+	bottom: 8px;
+	text-align: center;
+	font-size: 0.75rem;
+	color: #565656;
+	left: 50%;
+	display: flex;
+	transform: translateX(-50%);
 }
 
 /* Contacts */
 
 .contacts {
-    display: none;
-    overflow-y: overlay;
+	display: none;
+	overflow-y: overlay;
 }
 
 .contacts.active {
-    display: block;
+	display: block;
 }
 
 .contacts-header {
-    display: flex;
-    width: 100%;
-    height: 24px;
-    padding: 0 6px;
-    margin: 8px 0 0 0;
-    box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	height: 24px;
+	padding: 0 6px;
+	margin: 8px 0 0 0;
+	box-sizing: border-box;
 }
 
 .contacts-header span {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
 }
 
 .contacts-header i {
-    width: 24px;
-    margin-right: 4px;
+	width: 24px;
+	margin-right: 4px;
 }
 
 .add-contact-btn {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .phone-btn {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .contacts-list {
-    margin: 0;
-    margin-bottom: 12px;
-    padding: 0;
-    list-style: none;
+	margin: 0;
+	margin-bottom: 12px;
+	padding: 0;
+	list-style: none;
 }
 
 .contacts-list li {
-    display: flex;
-    padding: 6px 12px;
-    margin: 6px 12px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    background: #242424;
+	display: flex;
+	padding: 6px 12px;
+	margin: 6px 12px;
+	border-radius: 8px;
+	box-sizing: border-box;
+	background: #242424;
 }
 
 .list-btn {
-    width: 24px;
-    max-width: 24px;
-    display: flex;
+	width: 24px;
+	max-width: 24px;
+	display: flex;
 }
 
 .contacts-list span {
-    flex: 1;
-    text-align: center;
-    flex-direction: row;
-    display: flex;
-    align-items: center;
+	flex: 1;
+	text-align: center;
+	flex-direction: row;
+	display: flex;
+	align-items: center;
 }
 
 .contacts-list .list-btn-container {
-    width: 12%;
+	width: 12%;
 }
 
 .filter-list {
-    list-style: none;
-    display: flex;
-    margin: 3% 0 0 0;
-    padding: 0;
+	list-style: none;
+	display: flex;
+	margin: 3% 0 0 0;
+	padding: 0;
 }
 
 /* Add contact screen */
 
 .add-contact {
-    display: none;
-    flex-direction: column;
-    background: #000;
+	display: none;
+	flex-direction: column;
+	background: #000;
 }
 
 .close-add-contacts-btn {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    cursor: pointer;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	cursor: pointer;
 }
 
 .add-contact.active {
-    display: flex;
+	display: flex;
 }
 
 .add-contact-permissions {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    padding: 25px 0;
+	display: flex;
+	justify-content: center;
+	flex: 1;
+	padding: 25px 0;
 }
 
 .permission-btn {
-    display: flex;
-    justify-content: center;
-    border: none;
-    outline: none;
-    width: 1.5cm;
-    height: 1.5cm;
-    border-radius: 50%;
-    background: #212121;
-    margin: 0 12px;
-    cursor: pointer;
+	display: flex;
+	justify-content: center;
+	border: none;
+	outline: none;
+	width: 1.5cm;
+	height: 1.5cm;
+	border-radius: 50%;
+	background: #212121;
+	margin: 0 12px;
+	cursor: pointer;
 }
 
 .permission-btn.active {
-    background: #1565C0;
+	background: #1565C0;
 }
 
 .add-contact-info {
-    text-align: center;
-    margin-bottom: 16px;
+	text-align: center;
+	margin-bottom: 16px;
 }
 
 /* Call screen */
 
 .call {
-    display: none;
-    flex-direction: column;
-    background: #000;
-    padding: 12px;
+	display: none;
+	flex-direction: column;
+	background: #000;
+	padding: 12px;
 }
 
 .call.active {
-    display: flex;
+	display: flex;
 }
 
 .call-name {
-    flex: 1;
-    text-align: center;
-    font-size: 1.5rem;
-    padding-top: 8px;
+	flex: 1;
+	text-align: center;
+	font-size: 1.5rem;
+	padding-top: 8px;
 }
 
 .rec-call-btn {
-    width: 1cm;
-    height: 1cm;
-    background: #1565C0;
-    border-radius: 50%;
-    padding: 4px 0 0 0;
-    margin-bottom: 6px;
-    border: none;
-    outline: none;
-    align-self: center;
-    align-items: center;
+	width: 1cm;
+	height: 1cm;
+	background: #1565C0;
+	border-radius: 50%;
+	padding: 4px 0 0 0;
+	margin-bottom: 6px;
+	border: none;
+	outline: none;
+	align-self: center;
+	align-items: center;
 }
 
 .rec-call-info {
-    align-self: center;
-    font-size: 0.75rem;
+	align-self: center;
+	font-size: 0.75rem;
 }
 
 .call-recording {
-    display: none;
-    font-size: 0.8rem;
-    text-align: center;
-    padding-bottom: 8px;
+	display: none;
+	font-size: 0.8rem;
+	text-align: center;
+	padding-bottom: 8px;
 }
 
 .call-recording.active {
-    display: block;
+	display: block;
 }
 
 /* Confirm Screen */
 
 .confirm {
-    display: none;
-    background: #000;
-    flex-direction: column;
+	display: none;
+	background: #000;
+	flex-direction: column;
 }
 
 .confirm.active {
-    display: flex;
+	display: flex;
 }
 
 .confirm-description {
-    flex: 1;
-    padding: 20px 22px 0;
-    font-size: 1rem;
+	flex: 1;
+	padding: 20px 22px 0;
+	font-size: 1rem;
 }
 
 .confirm-btn-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-    width: 80%;
-    margin: 22px auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 20px;
+	width: 80%;
+	margin: 22px auto;
 }
 
 .confirm-btn-container button {
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    outline: none;
-    cursor: pointer;
-    color: #fff;
+	padding: 4px 8px;
+	border-radius: 8px;
+	border: none;
+	font-size: 1rem;
+	outline: none;
+	cursor: pointer;
+	color: #fff;
 }
 
 .confirm-cancel-btn {
-    background: #C62828;
+	background: #C62828;
 }
 
 .confirm-ok-btn {
-    background: #2E7D32
+	background: #2E7D32
 }
 
 /* Message Screen */
 
 .message {
-    display: none;
-    background: #000;
+	display: none;
+	background: #000;
 }
 
 .message.active {
-    display: block
+	display: block
 }
 
 .close-message-btn {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    cursor: pointer;
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	cursor: pointer;
 }
 
 .message-author {
-    position: absolute;
-    top: 8px;
-    left: 20%;
-    font-size: 1.25rem;
+	position: absolute;
+	top: 8px;
+	left: 20%;
+	font-size: 1.25rem;
 }
 
 .message-content {
-    position: absolute;
-    top: 32%;
-    width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.9rem;
+	position: absolute;
+	top: 32%;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 0.9rem;
 }
 
 @media screen and (max-width: 600px) {
-    .helper-contacts-list {
-        list-style: none;
-        margin: 20px 24px 12px;
-        padding: 0;
-        -moz-column-count: 1;
-        -moz-column-gap: 0px;
-        -webkit-column-count: 1;
-        -webkit-column-gap: 0px;
-        column-count: 1;
-        column-gap: 0px;
-    }
+	.helper-contacts-list {
+		list-style: none;
+		margin: 20px 24px 12px;
+		padding: 0;
+		-moz-column-count: 1;
+		-moz-column-gap: 0px;
+		-webkit-column-count: 1;
+		-webkit-column-gap: 0px;
+		column-count: 1;
+		column-gap: 0px;
+	}
 }
