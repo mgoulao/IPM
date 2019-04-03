@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('../libraries/roboto/font.css');
 html {
 	font-family: "Roboto", sans-serif;
 	font-weight: 100;
@@ -356,6 +356,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 	width: 24px;
 	max-width: 24px;
 	display: flex;
+	cursor: pointer;
 }
 
 .contacts-list span {
@@ -367,7 +368,11 @@ h1, h2, h3, h4, h5, h6, span, p {
 }
 
 .contacts-list .list-btn-container {
-	width: 12%;
+	display: flex;
+}
+
+.contacts-list .list-btn-container .list-btn:first-child {
+	margin-right: 12px;
 }
 
 .filter-list {
@@ -440,6 +445,11 @@ h1, h2, h3, h4, h5, h6, span, p {
 	display: flex;
 }
 
+.close-call-btn {
+	position: absolute;
+	cursor: pointer;
+}
+
 .call-name {
 	flex: 1;
 	text-align: center;
@@ -458,6 +468,10 @@ h1, h2, h3, h4, h5, h6, span, p {
 	outline: none;
 	align-self: center;
 	align-items: center;
+}
+
+.rec-call-btn.highlight {
+	background: #D50000;
 }
 
 .rec-call-info {
@@ -549,6 +563,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 	position: absolute;
 	top: 32%;
 	width: 80%;
+	margin-bottom: 12px;
 	left: 50%;
 	transform: translateX(-50%);
 	font-size: 0.9rem;

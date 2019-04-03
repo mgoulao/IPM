@@ -222,9 +222,9 @@ class ContactManager {
               <i class="material-icons helper-add-contact-btn">add</i>
 						</div>
 						${e.added && e.receiveCall ?
-					  	'<i class="material-icons helper-add-message-btn">mic</i>'
-					  	: ''
-						}
+					'<i class="material-icons helper-add-message-btn">mic</i>'
+					: ''
+				}
           </div>
         </li>`
 		});
@@ -334,18 +334,25 @@ class CallScreen {
 	}
 
 	setupListeners() {
-		let endCallBtn = document.querySelector(".rec-call-btn");
+		let recCallBtn = document.querySelector(".rec-call-btn");
 		let recordingText = document.querySelector(".call-recording");
+		let closeCallBtn = document.querySelector(".close-call-btn");
 
-		endCallBtn.addEventListener("mousedown", () => {
+		closeCallBtn.addEventListener("click",() => {
+			this.close();
+		})
+
+		recCallBtn.addEventListener("mousedown", () => {
 			recordingText.classList.add("active");
+			recCallBtn.classList.add("highlight");
 		});
 
-		endCallBtn.addEventListener("mouseup", () => {
+		recCallBtn.addEventListener("mouseup", () => {
 			let description = "Do you want send this message";
 			let confirmScreen = new ConfirmScreen();
 			confirmScreen.open(description, () => { }, () => { this.close() });
 			recordingText.classList.remove("active");
+			recCallBtn.classList.remove("highlight");
 		});
 	}
 
@@ -370,7 +377,6 @@ class Contacts {
 		this.setupListeners();
 		this.contactManager = new ContactManager(this);
 		this.callScreen = new CallScreen();
-		this.notification = false;
 		this.createListElem();
 	}
 
@@ -381,14 +387,17 @@ class Contacts {
 			if (e.added) {
 				listElems +=
 					`<li id="${e.id}">
-                <span>${e.name}</span>
-                <div class="list-btn-container">
-                    <div class="list-btn">
-												${e.call && e.messages.length === 0 ? '<i class="material-icons phone-btn">local_phone</i>' : ''}
-												${e.messages.length > 0 ? '<i class="material-icons message-btn">message</i>' : ''}
-                    </div>
-                </div>
-                </li>`;
+            <span>${e.name}</span>
+						<div class="list-btn-container">
+							<div class="list-btn">
+								${e.locate ? '<i class="material-icons location-btn">location_on</i>' : ''}
+              </div>
+            	<div class="list-btn">
+								${e.call && e.messages.length === 0 ? '<i class="material-icons phone-btn">local_phone</i>' : ''}
+								${e.messages.length > 0 ? '<i class="material-icons message-btn">message</i>' : ''}
+              </div>
+            </div>
+          </li>`;
 			}
 		});
 		let contactsList = document.querySelector(".contacts-list");
@@ -429,7 +438,7 @@ class Contacts {
 			let message = "";
 
 			contact.messages.forEach((e) => {
-				message += "\n" + e;
+				message += e + "</br>";
 			});
 			contact.messages = [];
 			this.createListElem();
@@ -453,19 +462,11 @@ class Contacts {
 		this.createListElem();
 	}
 
-	addNotification() {
-		this.notification = true;
-	}
-
-	removeNotification() {
-
-	}
-
 }
 
 class MessageScreen {
 
-	
+
 	constructor() {
 		this.elem = document.querySelector(".message");
 		this.setupListeners();
