@@ -296,6 +296,68 @@ h1, h2, h3, h4, h5, h6, span, p {
 	padding-top: 1px;
 }
 
+/* Places */
+
+.places {
+	display: none;
+	overflow-y: overlay;
+	background: #000;
+}
+
+.places.active {
+	display: block;
+}
+
+.places-title {
+	padding: 3% 6%;
+
+}
+
+.place-filters-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.filter-list {
+	display: flex;
+	flex: 1;
+	background: #242424;
+	margin: 0 5% 0;
+	padding: 0;
+	border-radius: 14px;
+	list-style: none;
+	overflow: hidden;
+}
+
+.filter-list:nth-child(3) {
+	margin-top: 5%;
+
+}
+
+.filter-list li {
+	display: flex;
+	align-items: center;
+	padding: 8px 5px;
+	flex: 1;
+	text-align: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.filter-list li.active {
+	background: #1565C0;
+}
+
+.filter-museum {
+	width: 20px;
+	height: 20px;
+}
+
+.more-content-indicator {
+	text-align: center;
+}
+
 /* Contacts */
 
 .contacts {
@@ -373,13 +435,6 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .contacts-list .list-btn-container .list-btn:first-child {
 	margin-right: 12px;
-}
-
-.filter-list {
-	list-style: none;
-	display: flex;
-	margin: 3% 0 0 0;
-	padding: 0;
 }
 
 /* Add contact screen */

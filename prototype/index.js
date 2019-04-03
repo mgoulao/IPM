@@ -39,7 +39,6 @@ const hourToString = (date) => {
 	return `${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes}`;
 }
 
-
 const randomMessage = () => {
 	let messages = [
 		"Estou perdido ajuda.",
@@ -51,7 +50,7 @@ const randomMessage = () => {
 
 class Swipe {
 	constructor() {
-		this.screens = ["home", "contacts"];
+		this.screens = ["home", "places", "contacts"];
 		this.currentScreen = 0;
 		this.previousScreen = -1;
 
@@ -107,6 +106,10 @@ class Clock {
 		this.day.innerHTML = dayToString(date.getDay());
 		this.date.innerHTML = dateToString(date);
 	}
+}
+
+class Places {
+
 }
 
 class ContactManager {
@@ -253,7 +256,7 @@ class ContactManager {
 			let checked = e.currentTarget.checked;
 			this.contacts.forEach((contact) => {
 				if (id === contact.id) {
-					contact.location = checked;
+					contact.locate = checked;
 				}
 			});
 		});
@@ -521,5 +524,6 @@ class ConfirmScreen {
 window.onload = () => {
 	let clock = new Clock();
 	let contacts = new Contacts();
+	let places = new Places();
 	let swipe = new Swipe();
 }
