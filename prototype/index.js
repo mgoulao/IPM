@@ -41,9 +41,17 @@ const hourToString = (date) => {
 
 const randomMessage = () => {
 	let messages = [
-		"Estou perdido ajuda.",
-		"Onde estás, não consigo ver-te",
-		"Encontramo-nos no sitio combinado às 4"
+		"I'm lost.",
+		"Where are you, I can't see you",
+		"I'll arrive to the hotel at 5",
+		"Are you at home?",
+		"Is John with you",
+		"I'm going to the supermarket to buy some food",
+		"Cozidos restaurant seems good",
+		"What restaurant should we go tonight",
+		"Are you ok?",
+		"I'm fine thanks",
+		"What am I doing with my life"
 	];
 	return messages[Math.floor(Math.random() * messages.length)];
 }
@@ -61,7 +69,8 @@ const getPlaceIcon = (type) => {
 			res = "local_bar";
 			break;
 		case "restaurant":
-			res = "restaurant"
+			res = "restaurant";
+			break;
 		default:
 			res = "location_on";
 	}
@@ -133,7 +142,7 @@ class Places {
 		this.places = [
 			{
 				id: 1,
-				name: "Jardim S",
+				name: "O Jardim",
 				rating: 4.5,
 				distance: 0.4,
 				type: "garden",
@@ -171,7 +180,46 @@ class Places {
 				type: "museum",
 				fav: true
 			},
-
+			{
+				id: 6,
+				name: "Pizzassssss",
+				rating: 3.8,
+				distance: 1.4,
+				type: "restaurant",
+				fav: true
+			},
+			{
+				id: 7,
+				name: "Xin li",
+				rating: 4.9,
+				distance: 1.9,
+				type: "restaurant",
+				fav: true
+			},
+			{
+				id: 8,
+				name: "Pede um copo",
+				rating: 2.8,
+				distance: 3.0,
+				type: "bar",
+				fav: false
+			},
+			{
+				id: 9,
+				name: "Baril",
+				rating: 1.5,
+				distance: 7.3,
+				type: "bar",
+				fav: false
+			},
+			{
+				id: 10,
+				name: "Arco do Cego",
+				rating: 2.1,
+				distance: 0.2,
+				type: "garden",
+				fav: false
+			},
 		];
 		this.filters = {
 			all: { key: "all", function: (a) => { return true } },
@@ -182,8 +230,10 @@ class Places {
 			garden: { key: "garden", function: (a) => { return a.type === "garden" } },
 		}
 		this.sorts = {
-			rating: { key: "rating", 
-			function: (a, b) => {return b.rating - a.rating}},
+			rating: {
+				key: "rating",
+				function: (a, b) => { return b.rating - a.rating }
+			},
 			km: { key: "km", function: (a, b) => { return a.distance - b.distance } },
 			abc: {
 				key: "abc",
@@ -501,7 +551,7 @@ class CallScreen {
 		});
 
 		recCallBtn.addEventListener("mouseup", () => {
-			let description = "Do you want send this message";
+			let description = "Do you want send this message?";
 			let confirmScreen = new ConfirmScreen();
 			confirmScreen.open(description, () => { }, () => { this.close() });
 			recordingText.classList.remove("active");
