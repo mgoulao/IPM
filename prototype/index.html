@@ -25,10 +25,10 @@
 					<div class="place-filters-container">
 						<span class="places-title">Places</span>
 						<ul class="places-type-filter filter-list">
-							<li class="active">ALL</li>
-							<li><i class="material-icons">bookmark_border</i></li>
-							<li><i class="material-icons">restaurant</i></li>
-							<li><svg class="filter-museum" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+							<li id="all" class="active">All</li>
+							<li id="fav"><i class="material-icons">bookmark_border</i></li>
+							<li id="restaurant"><i class="material-icons">restaurant</i></li>
+							<li id="museum"><svg class="filter-museum" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 22.34 24.08">
 									<defs>
 										<style>
@@ -46,15 +46,18 @@
 									<rect class="f1" x="12.39" y="6.63" width="1.88" height="15.74" />
 									<rect class="f1" x="16.7" y="6.63" width="1.88" height="15.74" />
 								</svg></li>
-							<li><i class="material-icons">local_bar</i></li>
-							<li><i class="material-icons">nature_people</i></li>
+							<li id="bar"><i class="material-icons">local_bar</i></li>
+							<li id="garden"><i class="material-icons">nature_people</i></li>
 						</ul>
 						<ul class="places-props-filter filter-list">
-							<li><i class="material-icons">star</i></li>
-							<li class="active">Km</li>
-							<li>adc</li>
+							<li id="rating"><i class="material-icons">star</i></li>
+							<li id="km" class="active">Km</li>
+							<li id="abc">adc</li>
 						</ul>
 						<i class="material-icons more-content-indicator">keyboard_arrow_down</i>
+						<ul class="places-list">
+							
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -148,8 +151,12 @@
 		</div>
 		<div class="overlay message">
 			<i class="material-icons close-message-btn">close</i>
-			<h5 class="message-author"></h5>
-			<h6 class="message-content"></h6>
+			<h5 class="message-author">
+				<!-- Author name -->
+			</h5>
+			<h6 class="message-content">
+				<!-- Message content -->
+			</h6>
 		</div>
 		<div class="overlay confirm">
 			<h5 class="confirm-description"></h5>

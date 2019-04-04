@@ -310,7 +310,6 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .places-title {
 	padding: 3% 6%;
-
 }
 
 .place-filters-container {
@@ -332,7 +331,6 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .filter-list:nth-child(3) {
 	margin-top: 5%;
-
 }
 
 .filter-list li {
@@ -356,6 +354,72 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .more-content-indicator {
 	text-align: center;
+}
+
+.places-list {
+	margin: 0;
+	padding: 0;
+}
+
+.places-list li {
+	display: flex;
+	margin: 12px 5%;
+	padding: 8px 10px;
+	background: #242424;
+	border-radius: 14px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.place-icon-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	width: 42px;
+	height: 42px;
+	background: #424242;
+}
+
+.place-info-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.place-name {
+	font-size: 1rem;
+	flex: 1;
+}
+
+.place-vertical-container {
+	padding-left: 12px;
+}
+
+.place-horizontal-container {
+	display: flex;
+	width: 100%;
+	flex: 1;
+}
+
+.place-horizontal-container i {
+	font-size: 20px;
+	color: #ffe168;
+}
+
+.place-rate span {
+	padding-top: 1px;
+	padding-right: 2px;
+}
+
+.place-horizontal-container span {
+	font-size: 0.9rem;
+}
+
+.place-rate {
+	display: flex;
+	align-items: center;
+	flex: 1;
 }
 
 /* Contacts */

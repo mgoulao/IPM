@@ -48,6 +48,26 @@ const randomMessage = () => {
 	return messages[Math.floor(Math.random() * messages.length)];
 }
 
+const getPlaceIcon = (type) => {
+	let res = "";
+	switch (type) {
+		case "garden":
+			res = "nature_people";
+			break;
+		case "museum":
+			res = "account_balance";
+			break;
+		case "bar":
+			res = "local_bar";
+			break;
+		case "restaurant":
+			res = "restaurant"
+		default:
+			res = "location_on";
+	}
+	return res;
+}
+
 class Swipe {
 	constructor() {
 		this.screens = ["home", "places", "contacts"];
@@ -109,6 +129,133 @@ class Clock {
 }
 
 class Places {
+	constructor() {
+		this.places = [
+			{
+				id: 1,
+				name: "Jardim S",
+				rating: 4.5,
+				distance: 0.4,
+				type: "garden",
+				fav: false,
+			},
+			{
+				id: 2,
+				name: "Cozidos",
+				rating: 3.4,
+				distance: 0.2,
+				type: "restaurant",
+				fav: true
+			},
+			{
+				id: 3,
+				name: "Xique",
+				rating: 1.0,
+				distance: 2.4,
+				type: "bar",
+				fav: false
+			},
+			{
+				id: 4,
+				name: "Museu de Arte",
+				rating: 4.3,
+				distance: 3.8,
+				type: "museum",
+				false: false
+			},
+			{
+				id: 5,
+				name: "Museu Moderno",
+				rating: 4.1,
+				distance: 5.2,
+				type: "museum",
+				fav: true
+			},
+
+		];
+		this.filters = {
+			all: { key: "all", function: (a) => { return true } },
+			fav: { key: "fav", function: (a) => { return a.fav } },
+			restaurant: { key: "restaurant", function: (a) => { return a.type === "restaurant" } },
+			museum: { key: "museum", function: (a) => { return a.type === "museum" } },
+			bar: { key: "bar", function: (a) => { return a.type === "bar" } },
+			garden: { key: "garden", function: (a) => { return a.type === "garden" } },
+		}
+		this.sorts = {
+			rating: { key: "rating", 
+			function: (a, b) => {return b.rating - a.rating}},
+			km: { key: "km", function: (a, b) => { return a.distance - b.distance } },
+			abc: {
+				key: "abc",
+				function: (a, b) => {
+					if (a.name < b.name) { return -1; }
+					if (a.name > b.name) { return 1; }
+					return 0;
+				}
+			},
+		}
+		this.placesFilter = this.filters.all;
+		this.placesSort = this.sorts.km;
+
+		this.createPlacesList();
+		this.setupListeners();
+	}
+
+	createPlacesList() {
+		let placesListElem = document.querySelector(".places-list");
+		let res = "";
+		this.places.sort(this.placesSort.function);
+		this.places.forEach((e) => {
+			let icon = getPlaceIcon(e.type);
+			if (this.placesFilter.function(e)) {
+				res +=
+					`<li id="${e.id}">
+					<div class="place-icon-container">
+						<i class="material-icons">${icon}</i>
+					</div>
+					<div class="place-info-container">
+						<div class="place-vertical-container">
+							<h5 class="place-name">${e.name}</h5>
+							<div class="place-horizontal-container">
+								<div class="place-rate">
+									<span>${e.rating}</span>
+									<i class="material-icons">star</i>
+								</div>
+								<span class="place-distance">${e.distance} Km</span>
+							</div>
+						</div>
+					</div>
+				</li>`;
+			}
+		});
+		placesListElem.innerHTML = res;
+	}
+
+	setupListeners() {
+		$(document).on("click", ".places-type-filter li", (e) => {
+			let previousSelect = this.placesFilter.key;
+			let newSelect = e.currentTarget.getAttribute("id");
+
+			this.placesFilter = this.filters[newSelect];
+
+			document.getElementById(previousSelect).classList.remove("active");
+			document.getElementById(newSelect).classList.add("active");
+
+			this.createPlacesList();
+		});
+
+		$(document).on("click", ".places-props-filter li", (e) => {
+			let previousSelect = this.placesSort.key;
+			let newSelect = e.currentTarget.getAttribute("id");
+
+			this.placesSort = this.sorts[newSelect];
+
+			document.getElementById(previousSelect).classList.remove("active");
+			document.getElementById(newSelect).classList.add("active");
+
+			this.createPlacesList();
+		});
+	}
 
 }
 
@@ -212,6 +359,9 @@ class ContactManager {
 	createContactsList() {
 		let listElem = document.querySelector(".helper-contacts-list");
 		let res = "";
+
+		this.contacts.sort()
+
 		this.contacts.forEach((e) => {
 			res +=
 				`<li id="${e.id}">
@@ -341,7 +491,7 @@ class CallScreen {
 		let recordingText = document.querySelector(".call-recording");
 		let closeCallBtn = document.querySelector(".close-call-btn");
 
-		closeCallBtn.addEventListener("click",() => {
+		closeCallBtn.addEventListener("click", () => {
 			this.close();
 		})
 
