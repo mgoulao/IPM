@@ -220,7 +220,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 }
 
 .home .hours {
-	color: #887d18;
+	color: #c07014;
 	font-size: 4.8rem;
 	margin-right: 6px;
 }
@@ -406,6 +406,10 @@ h1, h2, h3, h4, h5, h6, span, p {
 	flex-direction: column;
 }
 
+.place-info-fav {
+	cursor: pointer;
+}
+
 .place-name {
 	font-size: 1rem;
 	flex: 1;
@@ -545,7 +549,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 	cursor: pointer;
 }
 
-.phone-btn {
+.phone-btn, .location-btn {
 	cursor: pointer;
 }
 
@@ -593,10 +597,11 @@ h1, h2, h3, h4, h5, h6, span, p {
 .pal-finder {
 	display: none;
 	background: #000;
+	flex-direction: column;
 }
 
 .pal-finder.active {
-	display: block;
+	display: flex;
 }
 
 .close-pal-finder-btn {
@@ -606,6 +611,87 @@ h1, h2, h3, h4, h5, h6, span, p {
 	top: 8px;
 	left: 8px;
 	cursor: pointer;
+}
+
+.pal-finder-title {
+	position: absolute;
+	display: flex;
+	top: 7%;
+	left: 15%;
+	font-size: 1rem;
+}
+
+.pal-finder-map {
+	flex: 1;
+}
+
+.pal-finder-footer {
+	display: flex;
+	background: #242424;
+	padding: 2% 8%;
+}
+
+.pal-finder-footer-left {
+	display: flex;
+	align-items: center;
+	flex: 1;
+}
+.pal-finder-footer-left i {
+	margin-right: 4%;
+}
+
+.pal-finder-distance {
+	color: #fff;
+}
+
+.pal-finder-start-btn {
+	width: 32px;
+	height: 32px;
+	background: #1E88E5;
+	border: none;
+	border-radius: 50%;
+	outline: none;
+	color: #fff;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+/* Navmode screen */
+
+.navmode {
+	display: none;
+	background: #000;
+}
+
+.navmode.active {
+	display: flex;
+	flex-direction: column;
+}
+
+.close-navmode-btn {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	cursor: pointer;
+}
+
+.navmode-footer {
+	position: absolute;
+	width: 50%;
+	bottom: 0;
+	left: 50%;
+	background: #242424;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 4px;
+	font-size: 1.2rem;
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+
 }
 
 /* Add contact screen */

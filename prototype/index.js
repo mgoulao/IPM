@@ -640,16 +640,23 @@ class CallScreen {
 class PalFinder {
 	constructor() {
 		this.elem = document.querySelector(".pal-finder");
+		this.navModeScreen = new NavMode();
 
 		this.setupListeners();
 	}
 
 	setupListeners() {
 		let closeBtn = document.querySelector(".close-pal-finder-btn");
+		let goBtn = document.querySelector(".pal-finder-start-btn");
 
 		closeBtn.addEventListener("click", () => {
 			this.close();
 		});
+
+		goBtn.addEventListener("click", () => {
+			this.navModeScreen.open();
+		});
+
 	}
 
 	open() {
@@ -815,6 +822,29 @@ class ConfirmScreen {
 	}
 }
 
+class NavMode {
+	constructor() {
+		this.elem = document.querySelector(".navmode");
+		
+		this.setupListeners();
+	}
+
+	setupListeners() {
+		let closeBtn = document.querySelector(".close-navmode-btn");
+
+		closeBtn.addEventListener("click", () => {
+			this.close();
+		});
+	}
+
+	open() {
+		this.elem.classList.add("active");
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+	}
+}
 
 window.onload = () => {
 	let clock = new Clock();
