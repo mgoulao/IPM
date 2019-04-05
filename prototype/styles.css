@@ -1,4 +1,5 @@
 @import url('../libraries/roboto/font.css');
+@import url('../libraries/teko/font.css');
 html {
 	font-family: "Roboto", sans-serif;
 	font-weight: 100;
@@ -207,8 +208,26 @@ h1, h2, h3, h4, h5, h6, span, p {
 }
 
 .home h4 {
+	font-family: "Teko", "Roboto", sans-serif;
 	font-size: 3rem;
 	font-weight: bold;
+	align-self: center;
+}
+
+.hours-container {
+	display: flex;
+	margin: -16px 0 -30px;
+}
+
+.home .hours {
+	color: #887d18;
+	font-size: 4.8rem;
+	margin-right: 6px;
+}
+
+.home .minutes {
+	color: #fff;
+	font-size: 4.8rem;
 }
 
 .home h6 {
@@ -422,6 +441,74 @@ h1, h2, h3, h4, h5, h6, span, p {
 	flex: 1;
 }
 
+/* Place info */
+
+.place-info {
+	display: none;
+	background: #000;
+}
+
+.place-info.active {
+	display: block;
+}
+
+.close-place-info-btn {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	cursor: pointer;
+}
+
+.place-info-header {
+	display: flex;
+	margin: 5% 5% 0 16%;
+	align-items: center;
+}
+
+.place-info-type {
+	color: #1E88E5;
+	font-size: 0.8rem;
+	text-transform: capitalize;
+}
+
+.place-info-name {
+	font-size: 1rem;
+}
+
+.place-info-vertical-container {
+	flex: 1;
+}
+
+.place-info-sorts {
+	display: flex;
+	text-align: center;
+	margin: 2% 16%;
+}
+
+.place-info-rating {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 6%;
+}
+
+.place-info-rating span {
+	margin-right: 2%;
+}
+
+.place-info-rating i {
+	font-size: 20px;
+	color: #AEEA00;
+}
+
+.place-info-distance {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 /* Contacts */
 
 .contacts {
@@ -499,6 +586,26 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .contacts-list .list-btn-container .list-btn:first-child {
 	margin-right: 12px;
+}
+
+/* Pal Finder */
+
+.pal-finder {
+	display: none;
+	background: #000;
+}
+
+.pal-finder.active {
+	display: block;
+}
+
+.close-pal-finder-btn {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	cursor: pointer;
 }
 
 /* Add contact screen */

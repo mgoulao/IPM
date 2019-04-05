@@ -36,7 +36,13 @@ const dateToString = (date) => {
 const hourToString = (date) => {
 	let hour = date.getHours();
 	let minutes = date.getMinutes();
-	return `${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes}`;
+	return `${hour < 10 ? "0" + hour : hour}`;
+}
+
+const minutesToString = (date) => {
+	let hour = date.getHours();
+	let minutes = date.getMinutes();
+	return `${minutes < 10 ? "0" + minutes : minutes}`;
 }
 
 const randomMessage = () => {
@@ -127,11 +133,13 @@ class Clock {
 	constructor() {
 		this.elem = document.querySelector(".home");
 		this.hours = document.querySelector(".hours");
+		this.minutes = document.querySelector(".minutes");
 		this.day = document.querySelector(".day");
 		this.date = document.querySelector(".date");
 
 		let date = new Date();
 		this.hours.innerHTML = hourToString(date);
+		this.minutes.innerHTML = minutesToString(date);
 		this.day.innerHTML = dayToString(date.getDay());
 		this.date.innerHTML = dateToString(date);
 	}
@@ -182,7 +190,7 @@ class Places {
 			},
 			{
 				id: 6,
-				name: "Pizzassssss",
+				name: "Pizza 👌",
 				rating: 3.8,
 				distance: 1.4,
 				type: "restaurant",
@@ -247,6 +255,8 @@ class Places {
 		this.placesFilter = this.filters.all;
 		this.placesSort = this.sorts.km;
 
+		this.placeInfoScreen = new PlaceInfo();
+
 		this.createPlacesList();
 		this.setupListeners();
 	}
@@ -305,6 +315,61 @@ class Places {
 
 			this.createPlacesList();
 		});
+
+		$(document).on("click", ".places-list li", (e) => {
+			let place;
+
+			this.places.forEach((currPlace) => {
+				if (e.currentTarget.getAttribute("id") == currPlace.id) {
+					place = currPlace;
+				}
+			});
+			this.placeInfoScreen.open(place);
+		});
+	}
+
+}
+
+class PlaceInfo {
+	constructor() {
+		this.elem = document.querySelector(".place-info");
+
+		this.setupListeners();
+	}
+
+	setupListeners() {
+		let closeBtn = document.querySelector(".close-place-info-btn");
+
+		closeBtn.addEventListener("click", () => {
+			this.close();
+		});
+	}
+
+	open(place) {
+		let typeElem = document.querySelector(".place-info-type");
+		let nameElem = document.querySelector(".place-info-name");
+		let favElem = document.querySelector(".place-info-fav");
+		let ratingElem = document.querySelector(".place-info-rating span");
+		let distanceElem = document.querySelector(".place-info-distance");
+
+		typeElem.innerHTML = place.type;
+		nameElem.innerHTML = place.name;
+		favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
+		ratingElem.innerHTML = place.rating;
+		distanceElem.innerHTML = place.distance;
+
+		this.elem.classList.add("active");
+
+		let favBtn = document.querySelector(".place-info-fav");
+		favBtn.addEventListener("click", () => {
+			place.fav = !place.fav;
+			favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
+
+		});
+	}
+
+	close() {
+		this.elem.classList.remove("active");
 	}
 
 }
@@ -572,6 +637,31 @@ class CallScreen {
 	}
 }
 
+class PalFinder {
+	constructor() {
+		this.elem = document.querySelector(".pal-finder");
+
+		this.setupListeners();
+	}
+
+	setupListeners() {
+		let closeBtn = document.querySelector(".close-pal-finder-btn");
+
+		closeBtn.addEventListener("click", () => {
+			this.close();
+		});
+	}
+
+	open() {
+		this.elem.classList.add("active");
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+	}
+
+}
+
 class Contacts {
 
 	constructor() {
@@ -580,6 +670,7 @@ class Contacts {
 		this.setupListeners();
 		this.contactManager = new ContactManager(this);
 		this.callScreen = new CallScreen();
+		this.palFinderScreen = new PalFinder();
 		this.createListElem();
 	}
 
@@ -630,6 +721,10 @@ class Contacts {
 
 		$(document).on('click', '.phone-btn', (e) => {
 			this.openCallScreen(e.originalEvent.path[3].getAttribute("id"));
+		});
+
+		$(document).on('click', '.location-btn', (e) => {
+			this.palFinderScreen.open();
 		});
 
 		$(document).on('click', '.message-btn', (e) => {
