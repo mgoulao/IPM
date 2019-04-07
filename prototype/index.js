@@ -616,7 +616,7 @@ class CallScreen {
 		});
 
 		recCallBtn.addEventListener("mouseup", () => {
-			let description = "Do you want send this message?";
+			let description = "Do you want to send this message?";
 			let confirmScreen = new ConfirmScreen();
 			confirmScreen.open(description, () => { }, () => { this.close() });
 			recordingText.classList.remove("active");
