@@ -387,7 +387,6 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: true,
 			},
@@ -397,7 +396,6 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: true,
 			},
@@ -407,7 +405,6 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: false,
 			},
@@ -417,7 +414,6 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: false,
 			}, {
@@ -426,7 +422,6 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: false,
 			}, {
@@ -435,7 +430,6 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 			},
 			{
@@ -444,7 +438,6 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: false,
 			},
@@ -454,7 +447,6 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: true,
 			},
@@ -464,7 +456,6 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
 				messages: [],
 				added: true,
 			},
@@ -474,7 +465,6 @@ class ContactManager {
 				call: true,
 				receiveCall: true,
 				locate: true,
-				beLocated: true, 
 				messages: [],
 				added: true,
 			},
@@ -552,22 +542,17 @@ class ContactManager {
 			let id = e.originalEvent.path[3].getAttribute("id");
 			if (this.waitingForResponse) {
 				let contact = this.getContact(id);
-
-				let receiveCall = document.getElementById("permission-call-btn").classList.contains("active");
-				let beLocated = document.getElementById("permission-location-btn").classList.contains("active");
-				contact.receiveCall = receiveCall;
-				contact.beLocated = beLocated; 
-
 				let message = `Do you want to add ${contact.name}?`;
-				let text = `<b>${contact.name}'s permissions:</b>`;
-				text += contact.receiveCall ? `<br>Send messages` : "";
-				text += contact.beLocated ? `<br>Find location` : "";
-				text += "<br><br><b>Your permissions:</b>";
-				text += contact.call ? `<br>Send messages` : ""; 
-				text += contact.locate ? `<br>Find location` : "";
+				let text = `${contact.name}'s permissions:<br>`;
+				text += contact.receiveCall ? `Send you messages` : "";
+				text += contact.locate ? `Find your location` : "";
+				text += "Your permissions";
+				text += contact.call ? `Send messages` : ""; 
+				text += contact.locate ? `Find location` : "";
 
-				this.confirmScreen.open(message, text, () => { this.close() }, () => {
-
+				this.confirmScreen.open(message, "", () => { this.close() }, () => {
+					let receiveCall = document.getElementById("permission-call-btn").classList.contains("active");
+					contact.receiveCall = receiveCall;
 					this.contactScreen.sendReponse(contact);
 					this.createContactsList();
 					this.close();
