@@ -356,7 +356,7 @@ class PlaceInfo {
 		nameElem.innerHTML = place.name;
 		favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
 		ratingElem.innerHTML = place.rating;
-		distanceElem.innerHTML = place.distance;
+		distanceElem.innerHTML = place.distance + " Km";
 
 		this.elem.classList.add("active");
 
