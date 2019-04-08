@@ -4,6 +4,9 @@ html {
 	font-family: "Roboto", sans-serif;
 	font-weight: 100;
 	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 body {
@@ -636,6 +639,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 	align-items: center;
 	flex: 1;
 }
+
 .pal-finder-footer-left i {
 	margin-right: 4%;
 }
@@ -691,7 +695,6 @@ h1, h2, h3, h4, h5, h6, span, p {
 	font-size: 1.2rem;
 	border-top-left-radius: 14px;
 	border-top-right-radius: 14px;
-
 }
 
 /* Add contact screen */
