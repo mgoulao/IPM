@@ -23,6 +23,8 @@
 			<div class="menu-item places">
 				<div class="menu-item-container">
 					<div class="place-filters-container">
+						<i class="places-reservations-btn material-icons">local_play</i>
+
 						<span class="places-title">Places</span>
 						<ul class="places-type-filter filter-list">
 							<li id="all" class="active">All</li>
@@ -152,72 +154,265 @@
 				</div>
 				<span class="place-info-distance">
 					<!-- Place distance --> Km</span>
+				<button class="place-go-btn">GO</button>
+			</div>
+			<span class="place-schedule-title">Schedule:</span>
+			<ul class="place-schedule-list">
+				<li id="seg">
+					<span class="place-schedule-day">Monday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+				<li id="ter">
+					<span class="place-schedule-day">Tuesday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+				<li id="qua">
+					<span class="place-schedule-day">Wednesday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+				<li id="qui">
+					<span class="place-schedule-day">Thursday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+				<li id="sex">
+					<span class="place-schedule-day">Friday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+				<li id="sab">
+					<span class="place-schedule-day">Saturday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+				<li id="dom">
+					<span class="place-schedule-day">Sunday</span>
+					<span class="place-schedule-time"></span>
+				</li>
+			</ul>
+			<div class="place-reservations-container">
+				<span class="place-reservations-title">Reservation</span>
+				<ul class="place-reservations-list igo-list">
+					<li>
+						<div class="place-reservations-date-container">
+							<span class="place-reservations-day">
+								<!-- Day --></span>
+							<span class="place-reservations-hour">
+								<!-- Hour --></span>
+						</div>
+						<span class="place-reservations-price">
+							<!-- Price --></span>
+					</li>
+				</ul>
+				<button class="create-reservation-btn">Create Reservation</button>
 			</div>
 		</div>
-		<div class="overlay call">
-			<i class="material-icons close-call-btn">close</i>
-			<h5 class="call-name">
-				<!-- Name -->
-			</h5>
-			<h6 class="call-recording">Recording...</h6>
-			<button class="rec-call-btn">
-				<i class="material-icons">mic</i>
-			</button>
-			<p class="rec-call-info">Press and Hold to Record</p>
-		</div>
-		<div class="overlay add-contact">
-			<i class="material-icons close-add-contacts-btn">close</i>
-			<div class="add-contact-permissions">
-				<button class="permission-btn" id="permission-location-btn">
-					<i class="material-icons">location_on</i>
-				</button>
-				<button class="permission-btn" id="permission-call-btn">
-					<i class="material-icons">phone</i>
-				</button>
-			</div>
-			<p class="add-contact-info">Keep both iGo's close</p>
-		</div>
-		<div class="overlay pal-finder">
-			<i class="close-pal-finder-btn material-icons">close</i>
-			<span class="pal-finder-title">Pal Finder</span>
-			<div class="pal-finder-map"></div>
-			<div class="pal-finder-footer">
-				<div class="pal-finder-footer-left">
-					<i class="material-icons">arrow_upward</i>
-					<span class="pal-finder-distance">0.4 Km</span>
-				</div>
-				<button class="pal-finder-start-btn">GO</button>
-			</div>
-		</div>
-		<div class="overlay navmode">
-			<i class="close-navmode-btn material-icons">close</i>
-			<div class="navmode-map">
 
-			</div>
-			<div class="navmode-footer">
-				<span>400 m</span>
+		<!-- Create Reservation -->
+		<div class="overlay create-reservation">
+			<i class="material-icons close-create-reservation-btn close-btn">close</i>
+			<span class="reservations-title screen-title">Create Reservation</span>
+			<div class="create-reservation-container">
+				<div class="form-item-container">
+					<h6 class="form-item-title">Name:</h6>
+					<h5 class="form-item-text form-place-name">
+						<!-- Place name -->
+					</h5>
+				</div>
+				<div class="form-item-container" data-enhance="false">
+					<h6 class="form-item-title">Date:</h6>
+					<div class="form-date-inputs-container">
+						<select name="day">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="14">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						</select>
+						<select name="month">
+							<option value="1">January</option>
+							<option value="2">February</option>
+							<option value="3">March</option>
+							<option value="4">April</option>
+							<option value="5">May</option>
+							<option value="6">June</option>
+							<option value="7">July</option>
+							<option value="8">August</option>
+							<option value="9">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<select name="year">
+							<option value="2019">2019</option>
+							<option value="2020">2020</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-item-container" data-enhance="false">
+					<h6 class="form-item-title">Number of people:</h6>
+					<div class="form-date-inputs-container">
+						<select name="people">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-item-container" data-enhance="false">
+					<h6 class="form-item-title">Time:</h6>
+					<div class="form-date-inputs-container">
+						<select name="hour">
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+						</select>
+						<select name="minute">
+							<option value="00">00</option>
+							<option value="15">15</option>
+							<option value="30">30</option>
+							<option value="45">45</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-item-container">
+					<h6 class="form-item-title">Price:</h6>
+					<h5 class="form-item-text form-price">
+						<!-- Price -->
+					</h5>
+				</div>
+				<button class="form-confirm-btn">Confirm</button>
 			</div>
 		</div>
-		<div class="overlay message">
-			<i class="material-icons close-message-btn">close</i>
-			<h5 class="message-author">
-				<!-- Author name -->
-			</h5>
-			<h6 class="message-content">
-				<!-- Message content -->
-			</h6>
-			<button class="message-reply-btn">Reply</button>
+
+	<!-- Reservations -->
+	<div class="overlay reservations">
+		<i class="material-icons close-reservations-btn">close</i>
+		<span class="reservations-title screen-title">Reservations</span>
+		<ul class="reservations-list">
+			<!-- Reservations list -->
+		</ul>
+	</div>
+
+	<!-- Call -->
+	<div class="overlay call">
+		<i class="material-icons close-call-btn">close</i>
+		<h5 class="call-name">
+			<!-- Name -->
+		</h5>
+		<h6 class="call-recording">Recording...</h6>
+		<button class="rec-call-btn">
+			<i class="material-icons">mic</i>
+		</button>
+		<p class="rec-call-info">Press and Hold to Record</p>
+	</div>
+
+	<!-- Add Contact -->
+	<div class="overlay add-contact">
+		<i class="material-icons close-add-contacts-btn">close</i>
+		<div class="add-contact-permissions">
+			<button class="permission-btn" id="permission-location-btn">
+				<i class="material-icons">location_on</i>
+			</button>
+			<button class="permission-btn" id="permission-call-btn">
+				<i class="material-icons">phone</i>
+			</button>
 		</div>
-		<div class="overlay confirm">
-			<h5 class="confirm-description"></h5>
-			<h6 class="confirm-text"></h6>
-			<div class="confirm-btn-container">
-				<button class="confirm-cancel-btn">No</button>
-				<button class="confirm-ok-btn">Yes</button>
+		<p class="add-contact-info">Keep both iGo's close</p>
+	</div>
+
+	<!-- Pal Finder -->
+	<div class="overlay pal-finder">
+		<i class="close-pal-finder-btn material-icons">close</i>
+		<span class="pal-finder-title screen-title">Pal Finder</span>
+		<div class="pal-finder-map"></div>
+		<div class="pal-finder-footer">
+			<div class="pal-finder-footer-left">
+				<i class="material-icons">arrow_upward</i>
+				<span class="pal-finder-distance">0.4 Km</span>
 			</div>
+			<button class="pal-finder-start-btn">GO</button>
 		</div>
 	</div>
+
+	<!-- Navmode -->
+	<div class="overlay navmode">
+		<i class="close-navmode-btn material-icons">close</i>
+		<div class="navmode-map"><!-- Map --></div>
+		<div class="navmode-footer">
+			<span>400 m</span>
+		</div>
+	</div>
+
+	<!-- Message -->
+	<div class="overlay message">
+		<i class="material-icons close-message-btn">close</i>
+		<h5 class="message-author">
+			<!-- Author name -->
+		</h5>
+		<h6 class="message-content">
+			<!-- Message content -->
+		</h6>
+		<button class="message-reply-btn">Reply</button>
+	</div>
+
+	<!-- Confirm -->
+	<div class="overlay confirm">
+		<h5 class="confirm-description"></h5>
+		<h6 class="confirm-text"></h6>
+		<div class="confirm-btn-container">
+			<button class="confirm-cancel-btn">No</button>
+			<button class="confirm-ok-btn">Yes</button>
+		</div>
+	</div>
+	</div>
+
 	<script src="../libraries/jquery.min.js"></script>
+	<script>
+		$(document).bind("mobileinit", function () {
+			$.mobile.ignoreContentEnabled = true;
+		});
+	</script>
 	<script src="../libraries/jquery.mobile.min.js"></script>
 	<script src="./index.js"></script>
 </body>

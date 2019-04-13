@@ -1,3 +1,4 @@
+let count = 0;
 const dayToString = (day) => {
 	let ret = "";
 	switch (day) {
@@ -155,6 +156,12 @@ class Places {
 				distance: 0.4,
 				type: "garden",
 				fav: false,
+				hasReservation: false,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 2,
@@ -162,7 +169,19 @@ class Places {
 				rating: 3.4,
 				distance: 0.2,
 				type: "restaurant",
-				fav: true
+				fav: true,
+				hasReservation: true,
+				ratio: 7,
+				reservation: {
+					day: "23/3/2012",
+					hour: "20:45",
+					price: 26
+				},
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 3,
@@ -170,7 +189,14 @@ class Places {
 				rating: 1.0,
 				distance: 2.4,
 				type: "bar",
-				fav: false
+				fav: false,
+				hasReservation: true,
+				ratio: 30,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 4,
@@ -178,7 +204,14 @@ class Places {
 				rating: 4.3,
 				distance: 3.8,
 				type: "museum",
-				false: false
+				false: false,
+				hasReservation: true,
+				ratio: 5,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 5,
@@ -186,7 +219,14 @@ class Places {
 				rating: 4.1,
 				distance: 5.2,
 				type: "museum",
-				fav: true
+				fav: true,
+				hasReservation: true,
+				ratio: 10,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 6,
@@ -194,7 +234,14 @@ class Places {
 				rating: 3.8,
 				distance: 1.4,
 				type: "restaurant",
-				fav: true
+				fav: true,
+				hasReservation: true,
+				ratio: 8,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 7,
@@ -202,7 +249,14 @@ class Places {
 				rating: 4.9,
 				distance: 1.9,
 				type: "restaurant",
-				fav: true
+				fav: true,
+				hasReservation: true,
+				ratio: 15,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 8,
@@ -210,7 +264,13 @@ class Places {
 				rating: 2.8,
 				distance: 3.0,
 				type: "bar",
-				fav: false
+				fav: false,
+				hasReservation: false,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 9,
@@ -218,7 +278,13 @@ class Places {
 				rating: 1.5,
 				distance: 7.3,
 				type: "bar",
-				fav: false
+				fav: false,
+				hasReservation: false,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 			{
 				id: 10,
@@ -226,7 +292,13 @@ class Places {
 				rating: 2.1,
 				distance: 0.2,
 				type: "garden",
-				fav: false
+				fav: false,
+				hasReservation: false,
+				schedule: {
+					week: "8:30 - 20:00",
+					sat: "7:00 - 22:00",
+					sun: "7:00 - 22:00"
+				}
 			},
 		];
 		this.filters = {
@@ -256,6 +328,7 @@ class Places {
 		this.placesSort = this.sorts.km;
 
 		this.placeInfoScreen = new PlaceInfo();
+		this.reservationsScreen = new Reservations();
 
 		this.createPlacesList();
 		this.setupListeners();
@@ -292,6 +365,12 @@ class Places {
 	}
 
 	setupListeners() {
+		let reservationsBtn = document.querySelector(".places-reservations-btn");
+
+		reservationsBtn.addEventListener("click", () => {
+			this.reservationsScreen.open(this.places);
+		});
+
 		$(document).on("click", ".places-type-filter li", (e) => {
 			let previousSelect = this.placesFilter.key;
 			let newSelect = e.currentTarget.getAttribute("id");
@@ -333,16 +412,27 @@ class Places {
 class PlaceInfo {
 	constructor() {
 		this.elem = document.querySelector(".place-info");
+		this.createReservationScreen = new CreateReservation();
+		this.place;
+		this.clickHandler;
 
+		this.clickFavHandler = this.toggleFav.bind(this);
+		this.createReservationBtnHandle = this.openCreateReservationPlace.bind(this);
 		this.setupListeners();
 	}
 
 	setupListeners() {
 		let closeBtn = document.querySelector(".close-place-info-btn");
-
+		let createReservationBtn = document.querySelector(".create-reservation-btn");
 		closeBtn.addEventListener("click", () => {
 			this.close();
 		});
+
+		createReservationBtn.addEventListener("click", this.createReservationBtnHandle);
+	}
+
+	openCreateReservationPlace() {
+		this.createReservationScreen.open(this.place, this);
 	}
 
 	open(place) {
@@ -352,26 +442,272 @@ class PlaceInfo {
 		let ratingElem = document.querySelector(".place-info-rating span");
 		let distanceElem = document.querySelector(".place-info-distance");
 
+		this.place = place;
+
 		typeElem.innerHTML = place.type;
 		nameElem.innerHTML = place.name;
 		favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
 		ratingElem.innerHTML = place.rating;
 		distanceElem.innerHTML = place.distance + " Km";
 
+		let mon = document.querySelector("#seg .place-schedule-time");
+		let tue = document.querySelector("#ter .place-schedule-time");
+		let wed = document.querySelector("#qua .place-schedule-time");
+		let thu = document.querySelector("#qui .place-schedule-time");
+		let fri = document.querySelector("#sex .place-schedule-time");
+		let sat = document.querySelector("#sab .place-schedule-time");
+		let sun = document.querySelector("#dom .place-schedule-time");
+
+		mon.innerHTML = place.schedule.week;
+		tue.innerHTML = place.schedule.week;
+		wed.innerHTML = place.schedule.week;
+		thu.innerHTML = place.schedule.week;
+		fri.innerHTML = place.schedule.week;
+		sat.innerHTML = place.schedule.sat;
+		sun.innerHTML = place.schedule.sun;
+
+		let reservationsContainerElem = document.querySelector(".place-reservations-container");
+		let createReservationBtn = document.querySelector(".create-reservation-btn");
+		let reservationDayElem = document.querySelector(".place-reservations-day");
+		let reservationHourElem = document.querySelector(".place-reservations-hour");
+		let reservationPriceElem = document.querySelector(".place-reservations-price");
+
+		if (place.hasReservation) {
+			reservationsContainerElem.classList.add("active");
+			if (place.reservation) {
+				reservationDayElem.innerHTML = place.reservation.day;
+				reservationHourElem.innerHTML = place.reservation.hour;
+				reservationPriceElem.innerHTML = place.reservation.price + "€";
+				createReservationBtn.classList.remove("active");
+			} else {
+				reservationDayElem.innerHTML = "You don't have a reservation";
+				reservationHourElem.innerHTML = "";
+				reservationPriceElem.innerHTML = "";
+				createReservationBtn.classList.add("active");
+			}
+		} else {
+			reservationsContainerElem.classList.remove("active");
+		}
+
 		this.elem.classList.add("active");
 
 		let favBtn = document.querySelector(".place-info-fav");
-		favBtn.addEventListener("click", () => {
-			place.fav = !place.fav;
-			favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
+		favBtn.addEventListener("click", this.clickFavHandler);
+
+		this.setupListeners();
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+
+		let favBtn = document.querySelector(".place-info-fav");
+		let createReservationBtn = document.querySelector(".create-reservation-btn");
+
+		favBtn.removeEventListener("click", this.clickFavHandler);
+		createReservationBtn.removeEventListener("click", this.createReservationBtnHandle);
+	}
+
+	toggleFav() {
+		console.log(this.place.fav);
+		let favElem = document.querySelector(".place-info-fav");
+		this.place.fav = !this.place.fav;
+		favElem.innerHTML = this.place.fav ? "bookmark" : "bookmark_border";
+	}
+
+}
+
+class CreateReservation {
+	constructor() {
+		this.elem = document.querySelector(".create-reservation");
+		this.place;
+		this.state = {
+			day: "1",
+			month: "1",
+			year: "2019",
+			people: "1",
+			hour: "08",
+			minute: "00",
+			price: "0"
+		}
+
+		this.placeInfoScreen;
+
+		this.inputChangeHandler = (e) => { this.handleSelectChange(e) };
+		this.setupListeners();
+	}
+
+	setupListeners() {
+		let closeBtn = document.querySelector(".close-create-reservation-btn");
+		let submitBtn = document.querySelector(".form-confirm-btn");
+
+		let daySelectElem = document.querySelector("select[name=day]");
+		let monthSelectElem = document.querySelector("select[name=month]");
+		let yearSelectElem = document.querySelector("select[name=year]");
+		let peopleSelectElem = document.querySelector("select[name=people]");
+		let hourSelectElem = document.querySelector("select[name=hour]");
+		let minuteSelectElem = document.querySelector("select[name=minute]");
+
+		daySelectElem.addEventListener("change", this.inputChangeHandler);
+		monthSelectElem.addEventListener("change", this.inputChangeHandler);
+		yearSelectElem.addEventListener("change", this.inputChangeHandler);
+		peopleSelectElem.addEventListener("change", this.inputChangeHandler);
+		hourSelectElem.addEventListener("change", this.inputChangeHandler);
+		minuteSelectElem.addEventListener("change", this.inputChangeHandler);
+
+		closeBtn.addEventListener("click", () => {
+			this.close();
+		});
+
+		submitBtn.addEventListener("click", () => {
+			if (this.state.price === "0") return;
+
+			let { day, month, year, price, hour, minute, people } = this.state;
+			let confirmScreen = new ConfirmScreen();
+			let title = "Are you sure you want to do this reservation?";
+			let description = `Place: ${this.place.name}`;
+			description += `<br>Day: ${month}/${day}/${year}`;
+			description += `<br>Time: ${hour}:${minute}`;
+			description += `<br>People: ${people}`;
+			description += `<br>Price: ${price}€`;
+
+			confirmScreen.open(title, description, () => { }, () => {
+				this.place.reservation = {
+					day: `${month}/${day}/${year}`,
+					hour: `${hour}:${minute}`,
+					price: price
+				}
+
+				this.placeInfoScreen.open(this.place);
+				this.close();
+			});
 
 		});
+	}
+
+	handleSelectChange(event) {
+		let submitBtn = document.querySelector(".form-confirm-btn");
+		submitBtn.classList.add("active");
+
+		let { name, value } = event.target;
+		this.state[name] = value;
+
+		this.updatePrice();
+	}
+
+	updatePrice() {
+		let priceElem = document.querySelector(".form-price");
+		let { people } = this.state;
+		let { ratio } = this.place;
+		this.state.price = people * ratio;
+
+		priceElem.innerHTML = this.state.price + "€";
+	}
+
+	open(place, placeInfoScreen) {
+		this.placeInfoScreen = placeInfoScreen;
+		this.place = place;
+
+		let submitBtn = document.querySelector(".form-confirm-btn");
+		let nameElem = document.querySelector(".form-place-name");
+		let priceElem = document.querySelector(".form-price");
+
+		submitBtn.classList.remove("active");
+
+		nameElem.innerHTML = this.place.name;
+		priceElem.innerHTML = "0€";
+
+		this.elem.classList.add("active");
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+
+		// Reset State
+
+		let daySelectElem = document.querySelector("select[name=day]");
+		let monthSelectElem = document.querySelector("select[name=month]");
+		let yearSelectElem = document.querySelector("select[name=year]");
+		let peopleSelectElem = document.querySelector("select[name=people]");
+		let hourSelectElem = document.querySelector("select[name=hour]");
+		let minuteSelectElem = document.querySelector("select[name=minute]");
+
+		daySelectElem.value = 1;
+		monthSelectElem.value = 1;
+		yearSelectElem.value = 2019;
+		peopleSelectElem.value = 1;
+		hourSelectElem.value = "08";
+		minuteSelectElem.value = "00";
+
+		this.state = {
+			day: "1",
+			month: "1",
+			year: "2019",
+			people: "1",
+			hour: "08",
+			minute: "00",
+			price: "0"
+		}
+	}
+
+}
+
+class Reservations {
+	constructor() {
+		this.elem = document.querySelector(".reservations");
+		this.places = [];
+		this.setupListeners();
+	}
+
+	createReservationsList() {
+		let res = "";
+		let listContainer = document.querySelector(".reservations-list");
+		this.places.forEach((e) => {
+			if (e.hasReservation && e.reservation) {
+				let { day, hour, price } = e.reservation;
+				res +=
+					`<li id="${e.id}">
+					<div class="reservations-vertical-container">
+						<h5 class="reservations-item-title">${e.name}</h5>
+						<div class="reservations-horizontal-container">
+							<span class="reservations-time">${day} - ${hour}</span>
+						</div>
+					</div>
+					<span class="reservations-price">${price}€</span>
+				</li>`;
+			}
+		});
+
+		listContainer.innerHTML = res;
+	}
+
+	setupListeners() {
+		let closeBtn = document.querySelector(".close-reservations-btn");
+		closeBtn.addEventListener("click", () => {
+			this.close();
+		})
+
+		$(document).on("click", ".reservations-list li", (e) => {
+			let placeInfoScreen = new PlaceInfo();
+			let id = e.currentTarget.getAttribute("id");
+			let place;
+			this.places.forEach((e) => {
+				if (e.id == id) {
+					place = e;
+				}
+			});
+			placeInfoScreen.open(place);
+		});
+	}
+
+	open(places) {
+		this.elem.classList.add("active");
+		this.places = places;
+		this.createReservationsList();
 	}
 
 	close() {
 		this.elem.classList.remove("active");
 	}
-
 }
 
 class ContactManager {
@@ -387,7 +723,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: true,
 			},
@@ -397,7 +733,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: true,
 			},
@@ -407,7 +743,7 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: false,
 			},
@@ -417,7 +753,7 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: false,
 			}, {
@@ -426,7 +762,7 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: false,
 			}, {
@@ -435,7 +771,7 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 			},
 			{
@@ -444,7 +780,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: false,
 			},
@@ -454,7 +790,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: true,
 			},
@@ -464,7 +800,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: true,
 			},
@@ -474,7 +810,7 @@ class ContactManager {
 				call: true,
 				receiveCall: true,
 				locate: true,
-				beLocated: true, 
+				beLocated: true,
 				messages: [],
 				added: true,
 			},
@@ -556,14 +892,14 @@ class ContactManager {
 				let receiveCall = document.getElementById("permission-call-btn").classList.contains("active");
 				let beLocated = document.getElementById("permission-location-btn").classList.contains("active");
 				contact.receiveCall = receiveCall;
-				contact.beLocated = beLocated; 
+				contact.beLocated = beLocated;
 
 				let message = `Do you want to add ${contact.name}?`;
 				let text = `<b>${contact.name}'s permissions:</b>`;
 				text += contact.receiveCall ? `<br>Send messages` : "";
 				text += contact.beLocated ? `<br>Find location` : "";
 				text += "<br><br><b>Your permissions:</b>";
-				text += contact.call ? `<br>Send messages` : ""; 
+				text += contact.call ? `<br>Send messages` : "";
 				text += contact.locate ? `<br>Find location` : "";
 
 				this.confirmScreen.open(message, text, () => { this.close() }, () => {
