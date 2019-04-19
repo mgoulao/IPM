@@ -129,7 +129,11 @@
 							<rect class="cls-v" x="16.7" y="6.63" width="1.88" height="15.74" />
 						</svg>
 					</button>
-					<span class="home-info">slide sideways</span>
+					<div class="teacher-demands-container">
+						<i class="material-icons just-ugly-and-useless">arrow_back</i>
+						<span class="home-info">slide sideways</span>
+						<i class="material-icons just-ugly-and-useless">arrow_forward</i>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -325,86 +329,88 @@
 			</div>
 		</div>
 
-	<!-- Reservations -->
-	<div class="overlay reservations">
-		<i class="material-icons close-reservations-btn">close</i>
-		<span class="reservations-title screen-title">Reservations</span>
-		<ul class="reservations-list">
-			<!-- Reservations list -->
-		</ul>
-	</div>
-
-	<!-- Call -->
-	<div class="overlay call">
-		<i class="material-icons close-call-btn">close</i>
-		<h5 class="call-name">
-			<!-- Name -->
-		</h5>
-		<h6 class="call-recording">Recording...</h6>
-		<button class="rec-call-btn">
-			<i class="material-icons">mic</i>
-		</button>
-		<p class="rec-call-info">Press and Hold to Record</p>
-	</div>
-
-	<!-- Add Contact -->
-	<div class="overlay add-contact">
-		<i class="material-icons close-add-contacts-btn">close</i>
-		<div class="add-contact-permissions">
-			<button class="permission-btn" id="permission-location-btn">
-				<i class="material-icons">location_on</i>
-			</button>
-			<button class="permission-btn" id="permission-call-btn">
-				<i class="material-icons">phone</i>
-			</button>
+		<!-- Reservations -->
+		<div class="overlay reservations">
+			<i class="material-icons close-reservations-btn">close</i>
+			<span class="reservations-title screen-title">Reservations</span>
+			<ul class="reservations-list">
+				<!-- Reservations list -->
+			</ul>
 		</div>
-		<p class="add-contact-info">Keep both iGo's close</p>
-	</div>
 
-	<!-- Pal Finder -->
-	<div class="overlay pal-finder">
-		<i class="close-pal-finder-btn material-icons">close</i>
-		<span class="pal-finder-title screen-title">Pal Finder</span>
-		<div class="pal-finder-map"></div>
-		<div class="pal-finder-footer">
-			<div class="pal-finder-footer-left">
-				<i class="material-icons">arrow_upward</i>
-				<span class="pal-finder-distance">0.4 Km</span>
+		<!-- Call -->
+		<div class="overlay call">
+			<i class="material-icons close-call-btn">close</i>
+			<h5 class="call-name">
+				<!-- Name -->
+			</h5>
+			<h6 class="call-recording">Recording...</h6>
+			<button class="rec-call-btn">
+				<i class="material-icons">mic</i>
+			</button>
+			<p class="rec-call-info">Press and Hold to Record</p>
+		</div>
+
+		<!-- Add Contact -->
+		<div class="overlay add-contact">
+			<i class="material-icons close-add-contacts-btn">close</i>
+			<div class="add-contact-permissions">
+				<button class="permission-btn" id="permission-location-btn">
+					<i class="material-icons">location_on</i>
+				</button>
+				<button class="permission-btn" id="permission-call-btn">
+					<i class="material-icons">phone</i>
+				</button>
 			</div>
-			<button class="pal-finder-start-btn">GO</button>
+			<p class="add-contact-info">Keep both iGo's close</p>
 		</div>
-	</div>
 
-	<!-- Navmode -->
-	<div class="overlay navmode">
-		<i class="close-navmode-btn material-icons">close</i>
-		<div class="navmode-map"><!-- Map --></div>
-		<div class="navmode-footer">
-			<span>400 m</span>
+		<!-- Pal Finder -->
+		<div class="overlay pal-finder">
+			<i class="close-pal-finder-btn material-icons">close</i>
+			<span class="pal-finder-title screen-title">Pal Finder</span>
+			<div class="pal-finder-map"></div>
+			<div class="pal-finder-footer">
+				<div class="pal-finder-footer-left">
+					<i class="material-icons">arrow_upward</i>
+					<span class="pal-finder-distance">0.4 Km</span>
+				</div>
+				<button class="pal-finder-start-btn">GO</button>
+			</div>
 		</div>
-	</div>
 
-	<!-- Message -->
-	<div class="overlay message">
-		<i class="material-icons close-message-btn">close</i>
-		<h5 class="message-author">
-			<!-- Author name -->
-		</h5>
-		<h6 class="message-content">
-			<!-- Message content -->
-		</h6>
-		<button class="message-reply-btn">Reply</button>
-	</div>
-
-	<!-- Confirm -->
-	<div class="overlay confirm">
-		<h5 class="confirm-description"></h5>
-		<h6 class="confirm-text"></h6>
-		<div class="confirm-btn-container">
-			<button class="confirm-cancel-btn">No</button>
-			<button class="confirm-ok-btn">Yes</button>
+		<!-- Navmode -->
+		<div class="overlay navmode">
+			<i class="close-navmode-btn material-icons">close</i>
+			<div class="navmode-map">
+				<!-- Map -->
+			</div>
+			<div class="navmode-footer">
+				<span>400 m</span>
+			</div>
 		</div>
-	</div>
+
+		<!-- Message -->
+		<div class="overlay message">
+			<i class="material-icons close-message-btn">close</i>
+			<h5 class="message-author">
+				<!-- Author name -->
+			</h5>
+			<h6 class="message-content">
+				<!-- Message content -->
+			</h6>
+			<button class="message-reply-btn">Reply</button>
+		</div>
+
+		<!-- Confirm -->
+		<div class="overlay confirm">
+			<h5 class="confirm-description"></h5>
+			<h6 class="confirm-text"></h6>
+			<div class="confirm-btn-container">
+				<button class="confirm-cancel-btn">No</button>
+				<button class="confirm-ok-btn">Yes</button>
+			</div>
+		</div>
 	</div>
 
 	<script src="../libraries/jquery.min.js"></script>

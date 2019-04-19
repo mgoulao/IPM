@@ -249,7 +249,7 @@ ul {
 
 .hours-container {
 	display: flex;
-	margin: -16px 0 -30px;
+	margin: -20px 0 -32px;
 }
 
 .home .hours {
@@ -319,21 +319,35 @@ ul {
 	fill: #737373;
 }
 
-.home-info {
+.teacher-demands-container {
 	position: absolute;
 	bottom: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60%;
+	display: flex;
+	align-items: center;
+}
+
+.just-ugly-and-useless {
+	color: #565656;
+}
+
+.home-info {
+	flex: 1;
 	text-align: center;
 	font-size: 0.75rem;
 	color: #565656;
-	left: 50%;
 	display: flex;
-	transform: translateX(-50%);
+	justify-content: center;
 }
+
+
 
 .weather {
 	display: flex;
 	justify-content: center;
-	margin-top: -14px;
+	margin-top: -20px;
 }
 
 .weather i {
