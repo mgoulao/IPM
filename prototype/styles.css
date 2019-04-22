@@ -929,6 +929,7 @@ ul {
 .navmode.active {
 	display: flex;
 	flex-direction: column;
+	z-index: 5
 }
 
 .close-navmode-btn {

@@ -178,9 +178,9 @@ class Places {
 					price: 26
 				},
 				schedule: {
-					week: "12:30 - 15:00, 20:00 - 23:00",
-					sat: "12:30 - 15:00, 20:00 - 23:00",
-					sun: "12:30 - 15:00, 20:00 - 23:00"
+					week: "12:30 - 15:00,<br> 20:00 - 23:00",
+					sat: "12:30 - 15:00,<br> 20:00 - 23:00",
+					sun: "12:30 - 15:00,<br> 20:00 - 23:00"
 				}
 			},
 			{
@@ -193,9 +193,9 @@ class Places {
 				hasReservation: true,
 				ratio: 30,
 				schedule: {
-					week: "12:30 - 15:00, 20:00 - 23:00",
-					sat: "12:30 - 15:00, 20:00 - 23:00",
-					sun: "12:30 - 15:00, 20:00 - 23:00"
+					week: "12:30 - 15:00,<br> 20:00 - 23:00",
+					sat: "12:30 - 15:00,<br> 20:00 - 23:00",
+					sun: "12:30 - 15:00,<br> 20:00 - 23:00"
 				}
 			},
 			{
@@ -238,9 +238,9 @@ class Places {
 				hasReservation: true,
 				ratio: 8,
 				schedule: {
-					week: "11:00 - 15:00, 18:00 - 23:00",
-					sat: "11:00 - 15:00, 18:00 - 23:00",
-					sun: "11:00 - 15:00, 18:00 - 23:00"
+					week: "11:00 - 15:00,<br> 18:00 - 23:00",
+					sat: "11:00 - 15:00,<br> 18:00 - 23:00",
+					sun: "11:00 - 15:00,<br> 18:00 - 23:00"
 				}
 			},
 			{
@@ -253,9 +253,9 @@ class Places {
 				hasReservation: true,
 				ratio: 15,
 				schedule: {
-					week: "12:30 - 15:00, 20:00 - 23:00",
-					sat: "12:30 - 15:00, 20:00 - 23:00",
-					sun: "12:30 - 15:00, 20:00 - 23:00"
+					week: "12:30 - 15:00,<br> 20:00 - 23:00",
+					sat: "12:30 - 15:00,<br> 20:00 - 23:00",
+					sun: "12:30 - 15:00,<br> 20:00 - 23:00"
 				}
 			},
 			{
@@ -416,6 +416,8 @@ class PlaceInfo {
 		this.place;
 		this.clickHandler;
 
+		this.navModeScreen = new NavMode();
+
 		this.clickFavHandler = this.toggleFav.bind(this);
 		this.createReservationBtnHandle = this.openCreateReservationPlace.bind(this);
 		this.setupListeners();
@@ -424,8 +426,14 @@ class PlaceInfo {
 	setupListeners() {
 		let closeBtn = document.querySelector(".close-place-info-btn");
 		let createReservationBtn = document.querySelector(".create-reservation-btn");
+		let goBtn = document.querySelector(".place-go-btn");
+
 		closeBtn.addEventListener("click", () => {
 			this.close();
+		});
+
+		goBtn.addEventListener("click", () => {
+			this.navModeScreen.open();
 		});
 
 		createReservationBtn.addEventListener("click", this.createReservationBtnHandle);
