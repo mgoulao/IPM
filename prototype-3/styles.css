@@ -342,6 +342,8 @@ ul {
 	justify-content: center;
 }
 
+
+
 .weather {
 	display: flex;
 	justify-content: center;
@@ -606,7 +608,8 @@ ul {
 	font-size: 0.9rem;
 }
 
-.place-reservations-list {
+.place-reservations-list 
+{
 	margin-top: 3%;
 }
 
@@ -739,6 +742,7 @@ ul {
 
 .form-item-container {
 	margin-bottom: 6%;
+
 }
 
 .form-item-title {
@@ -749,7 +753,6 @@ ul {
 .form-item-text {
 	font-size: 1rem;
 }
-
 .form-date-inputs-container {
 	display: flex;
 }
@@ -879,6 +882,7 @@ ul {
 	cursor: pointer;
 }
 
+
 .pal-finder-map {
 	flex: 1;
 }
@@ -920,7 +924,6 @@ ul {
 .navmode {
 	display: none;
 	background: #000;
-	overflow: hidden;
 }
 
 .navmode.active {
@@ -936,8 +939,6 @@ ul {
 	top: 8px;
 	left: 8px;
 	cursor: pointer;
-	background: #242424;
-	border-radius: 50%;
 }
 
 .navmode-footer {
@@ -954,19 +955,6 @@ ul {
 	font-size: 1.2rem;
 	border-top-left-radius: 14px;
 	border-top-right-radius: 14px;
-}
-
-.navmode-map {
-	width: 100%;
-	height: 100%;
-	border: 2px solid #242424;
-}
-
-.dummy-map {
-	width: 100%;
-	height: 100%;
-	border-radius: 14px;
-	object-fit: cover;
 }
 
 /* Add contact screen */

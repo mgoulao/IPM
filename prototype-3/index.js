@@ -157,7 +157,6 @@ class Places {
 				type: "garden",
 				fav: false,
 				hasReservation: false,
-				phone: "212 490 340",
 				schedule: {
 					week: "8:30 - 20:00",
 					sat: "7:00 - 21:00",
@@ -173,7 +172,6 @@ class Places {
 				fav: true,
 				hasReservation: true,
 				ratio: 7,
-				phone: "212 490 234",
 				reservation: {
 					day: "23/3/2012",
 					hour: "20:45",
@@ -194,7 +192,6 @@ class Places {
 				fav: false,
 				hasReservation: true,
 				ratio: 30,
-				phone: "212 252 434",
 				schedule: {
 					week: "12:30 - 15:00,<br> 20:00 - 23:00",
 					sat: "12:30 - 15:00,<br> 20:00 - 23:00",
@@ -210,7 +207,6 @@ class Places {
 				false: false,
 				hasReservation: true,
 				ratio: 5,
-				phone: "217 443 453",
 				schedule: {
 					week: "8:30 - 20:00",
 					sat: "7:00 - 22:00",
@@ -226,7 +222,6 @@ class Places {
 				fav: true,
 				hasReservation: true,
 				ratio: 10,
-				phone: "212 490 234",
 				schedule: {
 					week: "8:30 - 20:00",
 					sat: "7:00 - 22:00",
@@ -242,7 +237,6 @@ class Places {
 				fav: true,
 				hasReservation: true,
 				ratio: 8,
-				phone: "212 490 234",
 				schedule: {
 					week: "11:00 - 15:00,<br> 18:00 - 23:00",
 					sat: "11:00 - 15:00,<br> 18:00 - 23:00",
@@ -258,7 +252,6 @@ class Places {
 				fav: true,
 				hasReservation: true,
 				ratio: 15,
-				phone: "212 490 234",
 				schedule: {
 					week: "12:30 - 15:00,<br> 20:00 - 23:00",
 					sat: "12:30 - 15:00,<br> 20:00 - 23:00",
@@ -273,7 +266,6 @@ class Places {
 				type: "bar",
 				fav: false,
 				hasReservation: false,
-				phone: "212 490 234",
 				schedule: {
 					week: "17:00 - 00:00",
 					sat: "15:00 - 03:00",
@@ -288,7 +280,6 @@ class Places {
 				type: "bar",
 				fav: false,
 				hasReservation: false,
-				phone: "212 490 234",
 				schedule: {
 					week: "closed",
 					sat: "15:00 - 5:00",
@@ -336,7 +327,7 @@ class Places {
 		this.placesFilter = this.filters.all;
 		this.placesSort = this.sorts.km;
 
-		this.placeInfoScreen = new PlaceInfo(this);
+		this.placeInfoScreen = new PlaceInfo();
 		this.reservationsScreen = new Reservations();
 
 		this.createPlacesList();
@@ -419,11 +410,7 @@ class Places {
 }
 
 class PlaceInfo {
-	constructor(placesScreen) {
-		this.placesScreen = null;
-		if (placesScreen !== undefined)
-			this.placesScreen = placesScreen;
-
+	constructor() {
 		this.elem = document.querySelector(".place-info");
 		this.createReservationScreen = new CreateReservation();
 		this.place;
@@ -442,13 +429,11 @@ class PlaceInfo {
 		let goBtn = document.querySelector(".place-go-btn");
 
 		closeBtn.addEventListener("click", () => {
-			if (this.placesScreen !== null)
-				this.placesScreen.createPlacesList();
 			this.close();
 		});
 
 		goBtn.addEventListener("click", () => {
-			this.navModeScreen.open(this.place.distance);
+			this.navModeScreen.open();
 		});
 
 		createReservationBtn.addEventListener("click", this.createReservationBtnHandle);
@@ -531,6 +516,7 @@ class PlaceInfo {
 	}
 
 	toggleFav() {
+		console.log(this.place.fav);
 		let favElem = document.querySelector(".place-info-fav");
 		this.place.fav = !this.place.fav;
 		favElem.innerHTML = this.place.fav ? "bookmark" : "bookmark_border";
@@ -576,10 +562,6 @@ class CreateReservation {
 		hourSelectElem.addEventListener("change", this.inputChangeHandler);
 		minuteSelectElem.addEventListener("change", this.inputChangeHandler);
 
-		let date = new Date();
-		daySelectElem.value = date.getDate();
-		monthSelectElem.value = date.getMonth();
-
 		closeBtn.addEventListener("click", () => {
 			this.close();
 		});
@@ -617,8 +599,6 @@ class CreateReservation {
 		let { name, value } = event.target;
 		this.state[name] = value;
 
-		this.createHoursOptions();
-
 		this.updatePrice();
 	}
 
@@ -631,28 +611,6 @@ class CreateReservation {
 		priceElem.innerHTML = this.state.price + "€";
 	}
 
-	createHoursOptions() {
-		let schedule = this.place.schedule.week;
-		let hourSelectElem = document.querySelector("select[name=hour]");
-
-		let schedulesList = schedule.split(",<br>");
-
-		console.log(schedulesList);
-		let res = "";
-		schedulesList.forEach((e) => {
-			let periodSplit = e.split(" - ");
-			let start = parseInt(periodSplit[0].split(":")[0], 10);
-			let end = parseInt(periodSplit[1].split(":")[0], 10);
-			for (let i = start; i < end; i++) {
-				res += `<option value="${i}">${i}</option>`;
-			}
-
-		});
-
-		hourSelectElem.innerHTML = res;
-
-	}
-
 	open(place, placeInfoScreen) {
 		this.placeInfoScreen = placeInfoScreen;
 		this.place = place;
@@ -660,8 +618,6 @@ class CreateReservation {
 		let submitBtn = document.querySelector(".form-confirm-btn");
 		let nameElem = document.querySelector(".form-place-name");
 		let priceElem = document.querySelector(".form-price");
-
-		this.createHoursOptions();
 
 		submitBtn.classList.remove("active");
 
@@ -1265,11 +1221,8 @@ class NavMode {
 		});
 	}
 
-	open(distance) {
-		let distanceElem = document.querySelector(".navmode-footer span");
+	open() {
 		this.elem.classList.add("active");
-		
-		distanceElem.innerHTML = `${distance} Km`;
 	}
 
 	close() {
