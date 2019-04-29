@@ -303,6 +303,7 @@ class Places {
 				type: "garden",
 				fav: false,
 				hasReservation: false,
+				phone: "no number",
 				schedule: {
 					week: "24h",
 					sat: "24h",
@@ -464,6 +465,7 @@ class PlaceInfo {
 		let favElem = document.querySelector(".place-info-fav");
 		let ratingElem = document.querySelector(".place-info-rating span");
 		let distanceElem = document.querySelector(".place-info-distance");
+		let placePhone = document.querySelector(".place-phone");
 
 		this.place = place;
 
@@ -472,6 +474,7 @@ class PlaceInfo {
 		favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
 		ratingElem.innerHTML = place.rating;
 		distanceElem.innerHTML = place.distance + " Km";
+		placePhone.innerHTML = place.phone;
 
 		let mon = document.querySelector("#seg .place-schedule-time");
 		let tue = document.querySelector("#ter .place-schedule-time");
@@ -578,7 +581,7 @@ class CreateReservation {
 
 		let date = new Date();
 		daySelectElem.value = date.getDate();
-		monthSelectElem.value = date.getMonth();
+		monthSelectElem.value = date.getMonth() + 1;
 
 		closeBtn.addEventListener("click", () => {
 			this.close();
