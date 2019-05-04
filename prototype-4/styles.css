@@ -458,22 +458,6 @@ ul {
 	flex-direction: column;
 }
 
-.place-info-fav-container {
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	width: 23%;
-}
-
-.place-info-fav-helper {
-	font-size: 0.8rem;
-	color: #1565C0;
-}
-
-.place-info-fav-helper.active {
-	color:#737373
-}
-
 .place-info-fav {
 	cursor: pointer;
 }
@@ -611,9 +595,6 @@ ul {
 
 .place-schedule-list li {
 	display: flex;
-	border-bottom: 1px solid #737373;
-	padding-bottom: 2px;
-	margin-bottom: 2px;
 }
 
 .place-schedule-day {
@@ -754,16 +735,6 @@ ul {
 	padding: 5%;
 	background: #242424;
 	border-radius: 14px;
-}
-
-.form-date-error {
-	display: none;
-	color: #D50000;
-	font-size: 0.9rem;
-}
-
-.form-date-error.active {
-	display: block;
 }
 
 .form-item-container {

@@ -462,7 +462,6 @@ class PlaceInfo {
 		let typeElem = document.querySelector(".place-info-type");
 		let nameElem = document.querySelector(".place-info-name");
 		let favElem = document.querySelector(".place-info-fav");
-		let favHelperElem = document.querySelector(".place-info-fav-helper");
 		let ratingElem = document.querySelector(".place-info-rating span");
 		let distanceElem = document.querySelector(".place-info-distance");
 
@@ -471,11 +470,6 @@ class PlaceInfo {
 		typeElem.innerHTML = place.type;
 		nameElem.innerHTML = place.name;
 		favElem.innerHTML = place.fav ? "bookmark" : "bookmark_border";
-		favHelperElem.innerHTML = place.fav ? "added" : "add";
-		if (place.fav)
-			favHelperElem.classList.add("active");
-		else
-			favHelperElem.classList.remove("active");
 		ratingElem.innerHTML = place.rating;
 		distanceElem.innerHTML = place.distance + " Km";
 
@@ -538,16 +532,8 @@ class PlaceInfo {
 
 	toggleFav() {
 		let favElem = document.querySelector(".place-info-fav");
-		let favHelperElem = document.querySelector(".place-info-fav-helper");
 		this.place.fav = !this.place.fav;
 		favElem.innerHTML = this.place.fav ? "bookmark" : "bookmark_border";
-		favHelperElem.innerHTML = this.place.fav ? "added" : "add";
-		if (this.place.fav)
-			favHelperElem.classList.add("active");
-		else
-			favHelperElem.classList.remove("active");
-
-
 	}
 
 }
@@ -556,13 +542,10 @@ class CreateReservation {
 	constructor() {
 		this.elem = document.querySelector(".create-reservation");
 		this.place;
-		let date = new Date();
-
 		this.state = {
-			valid: true,
-			day: date.getDate(),
-			month: date.getMonth()+1,
-			year: date.getFullYear(),
+			day: "1",
+			month: "1",
+			year: "2019",
 			people: "1",
 			hour: "08",
 			minute: "00",
@@ -593,19 +576,18 @@ class CreateReservation {
 		hourSelectElem.addEventListener("change", this.inputChangeHandler);
 		minuteSelectElem.addEventListener("change", this.inputChangeHandler);
 
-		let { day, month } = this.state;
-		daySelectElem.value = day;
-		monthSelectElem.value = month;
+		let date = new Date();
+		daySelectElem.value = date.getDate();
+		monthSelectElem.value = date.getMonth();
 
 		closeBtn.addEventListener("click", () => {
 			this.close();
 		});
 
 		submitBtn.addEventListener("click", () => {
-			let { day, month, year, price, hour, minute, people, valid } = this.state;
+			if (this.state.price === "0") return;
 
-			if (price === "0" || !valid) return;
-
+			let { day, month, year, price, hour, minute, people } = this.state;
 			let confirmScreen = new ConfirmScreen();
 			let title = "Are you sure you want to do this reservation?";
 			let description = `Place: ${this.place.name}`;
@@ -635,35 +617,9 @@ class CreateReservation {
 		let { name, value } = event.target;
 		this.state[name] = value;
 
-		this.checkDate();
-
 		this.createHoursOptions();
 
 		this.updatePrice();
-	}
-
-	checkDate() {
-		let errorMessage = document.querySelector(".form-date-error");
-		let { day, month, year, valid } = this.state;
-		let date = new Date();
-		valid = true;
-		let currentYear = date.getFullYear();
-		let currentMonth = date.getMonth() + 1;
-		let currentDate = date.getDate();
-		if (year == currentYear) {
-			if (month < currentMonth) {
-				errorMessage.classList.add("active");
-				valid = false;
-			} else if (month == currentMonth) {
-				if (parseInt(day) < currentDate) {
-					errorMessage.classList.add("active");
-					valid = false;
-				}
-			}
-		}
-		if (valid)
-			errorMessage.classList.remove("active");
-		this.state.valid = valid;
 	}
 
 	updatePrice() {
@@ -681,6 +637,7 @@ class CreateReservation {
 
 		let schedulesList = schedule.split(",<br>");
 
+		console.log(schedulesList);
 		let res = "";
 		schedulesList.forEach((e) => {
 			let periodSplit = e.split(" - ");
@@ -1311,7 +1268,7 @@ class NavMode {
 	open(distance) {
 		let distanceElem = document.querySelector(".navmode-footer span");
 		this.elem.classList.add("active");
-
+		
 		distanceElem.innerHTML = `${distance} Km`;
 	}
 
