@@ -303,6 +303,7 @@ class Places {
 				type: "garden",
 				fav: false,
 				hasReservation: false,
+				phone: "no number",
 				schedule: {
 					week: "24h",
 					sat: "24h",
@@ -465,6 +466,7 @@ class PlaceInfo {
 		let favHelperElem = document.querySelector(".place-info-fav-helper");
 		let ratingElem = document.querySelector(".place-info-rating span");
 		let distanceElem = document.querySelector(".place-info-distance");
+		let placePhone = document.querySelector(".place-phone");
 
 		this.place = place;
 
@@ -478,6 +480,7 @@ class PlaceInfo {
 			favHelperElem.classList.remove("active");
 		ratingElem.innerHTML = place.rating;
 		distanceElem.innerHTML = place.distance + " Km";
+		placePhone.innerHTML = place.phone;
 
 		let mon = document.querySelector("#seg .place-schedule-time");
 		let tue = document.querySelector("#ter .place-schedule-time");

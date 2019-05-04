@@ -625,6 +625,20 @@ ul {
 	font-size: 0.9rem;
 }
 
+.place-contact-container {
+	display: flex;
+	margin: 1% 0;
+}
+
+.place-contact-title {
+	flex: 1;
+}
+
+.place-phone {
+	font-size: 0.9rem;
+	margin-right: 10%;
+}
+
 .place-reservations-list {
 	margin-top: 3%;
 }
