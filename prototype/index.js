@@ -1299,7 +1299,13 @@ class ConfirmScreen {
 class NavMode {
 	constructor() {
 		this.elem = document.querySelector(".navmode");
-
+		this.maps = [
+			"../files/map1.png",
+			"../files/map2.png",
+			"../files/map3.png",
+			"../files/map4.png",
+			"../files/map5.png",
+		]
 		this.setupListeners();
 	}
 
@@ -1313,6 +1319,10 @@ class NavMode {
 
 	open(distance) {
 		let distanceElem = document.querySelector(".navmode-footer span");
+		let mapElem = document.querySelector(".dummy-map");
+
+		mapElem.src = this.maps[Math.floor(Math.random()*this.maps.length)];
+
 		this.elem.classList.add("active");
 
 		distanceElem.innerHTML = `${distance} Km`;
