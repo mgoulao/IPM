@@ -729,17 +729,17 @@ class CreateReservation {
 		let hourSelectElem = document.querySelector("select[name=hour]");
 		let minuteSelectElem = document.querySelector("select[name=minute]");
 
-		daySelectElem.value = 1;
-		monthSelectElem.value = 1;
-		yearSelectElem.value = 2019;
-		peopleSelectElem.value = 1;
-		hourSelectElem.value = "08";
-		minuteSelectElem.value = "00";
+		let date = new Date();
+
+		daySelectElem.value = date.getDate();
+		monthSelectElem.value = date.getMonth()+1;
+		yearSelectElem.value = date.getFullYear();
 
 		this.state = {
-			day: "1",
-			month: "1",
-			year: "2019",
+			valid: true,
+			day: date.getDate(),
+			month: date.getMonth()+1,
+			year: date.getFullYear(),
 			people: "1",
 			hour: "08",
 			minute: "00",
