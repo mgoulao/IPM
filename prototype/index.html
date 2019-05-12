@@ -165,7 +165,8 @@
 			</div>
 			<div class="place-contact-container">
 				<span class="place-schedule-title place-contact-title">Phone:</span>
-				<span class="place-phone"><!-- Phone --></span>
+				<span class="place-phone">
+					<!-- Phone --></span>
 			</div>
 			<span class="place-schedule-title">Schedule:</span>
 			<ul class="place-schedule-list">
@@ -375,15 +376,46 @@
 
 		<!-- Pal Finder -->
 		<div class="overlay pal-finder">
-			<i class="close-pal-finder-btn material-icons">close</i>
-			<span class="pal-finder-title screen-title">Pal Finder</span>
-			<div class="pal-finder-map"></div>
-			<div class="pal-finder-footer">
-				<div class="pal-finder-footer-left">
-					<i class="material-icons">arrow_upward</i>
-					<span class="pal-finder-distance">0.4 Km</span>
+			<div class="pal-finder-container">
+				<div class="pal-finder-main-screen">
+					<i class="close-pal-finder-btn material-icons">close</i>
+					<span class="pal-finder-title screen-title">Pal Finder</span>
+					<img class="pal-finder-map" />
+					<div class="pal-finder-footer">
+						<div class="pal-finder-footer-left">
+							<i class="material-icons">arrow_upward</i>
+							<span class="pal-finder-distance">0.4 Km</span>
+						</div>
+						<button class="pal-finder-start-btn">GO</button>
+					</div>
 				</div>
-				<button class="pal-finder-start-btn">GO</button>
+				<div class="meetup-container">
+					<button class="meetup-btn">Create meetup</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Create meetup -->
+		<div class="overlay create-meetup">
+			<h5 class="meetup-description"></h5>
+			<img class="meetup-map" src="../files/map1.png">
+			<div class="meetup-btn-container">
+				<button class="meetup-cancel-btn">Cancel</button>
+				<button class="meetup-ok-btn">Ok</button>
+				<button class="meetup-more-btn">Other place</button>
+			</div>
+			<div class="meetup-wait">
+				<h5>Waiting For Response</h5>
+			</div>
+		</div>
+
+		<!-- Create meetup -->
+		<div class="overlay confirm-meetup">
+			<h5 class="confirm-meetup-description"></h5>
+			<img class="confirm-meetup-map" src="../files/map1.png">
+			<div class="meetup-btn-container">
+				<button class="confirm-meetup-cancel-btn">Cancel</button>
+				<button class="confirm-meetup-ok-btn">Ok</button>
 			</div>
 		</div>
 

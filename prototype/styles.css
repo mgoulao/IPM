@@ -184,6 +184,15 @@ ul {
 	border-radius: 50%;
 }
 
+.helper-contact-permissions .helper-add-meetup-btn {
+	color: #fff;
+	cursor: pointer;
+	background: #c07014;
+	padding: 4px;
+	margin-left: 8px;
+	border-radius: 50%;
+}
+
 .helper-add-contact {
 	display: flex;
 	align-items: center;
@@ -471,7 +480,7 @@ ul {
 }
 
 .place-info-fav-helper.active {
-	color:#737373
+	color: #737373
 }
 
 .place-info-fav {
@@ -909,8 +918,24 @@ ul {
 	flex-direction: column;
 }
 
+.pal-finder-container {
+	height: 4cm;
+}
+
+.pal-finder-main-screen {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
 .pal-finder.active {
 	display: flex;
+}
+
+.pal-finder-title {
+	color: #212121;
+	z-index: 1;
+	font-weight: 600;
 }
 
 .close-pal-finder-btn {
@@ -920,16 +945,26 @@ ul {
 	top: 8px;
 	left: 8px;
 	cursor: pointer;
+	background: #242424;
+	border-radius: 50%;
+	z-index: 2;
 }
 
 .pal-finder-map {
+	position: absolute;
+	width: 100%;
+	object-fit: cover;
 	flex: 1;
 }
 
 .pal-finder-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	display: flex;
 	background: #242424;
 	padding: 2% 8%;
+	z-index: 1;
 }
 
 .pal-finder-footer-left {
@@ -956,6 +991,139 @@ ul {
 	color: #fff;
 	font-size: 13px;
 	cursor: pointer;
+}
+
+.meetup-container {
+	display: flex;
+	padding: 5%;
+}
+
+.meetup-btn {
+	border: none;
+	outline: none;
+	background: #1E88E5;
+	padding: 6px 18px;
+	margin: auto;
+	font-size: 1rem;
+	border-radius: 14px;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* Create meetup */
+
+.create-meetup {
+	display: none;
+	background: #000;
+	overflow: hidden;
+}
+
+.create-meetup.active {
+	display: flex;
+	flex-direction: column;
+}
+
+.meetup-btn-container {
+	display: flex;
+}
+
+.meetup-description {
+	position: absolute;
+	color: #212121;
+	padding: 2% 5%;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.meetup-map {
+	object-fit: cover;
+	height: 100%;
+}
+
+.meetup-btn-container button {
+	flex: 1;
+	border: none;
+	border-left: 1px solid #f2f2f2;
+	font-weight: 600;
+	outline: none;
+	color: #f2f2f2;
+	cursor: pointer;
+}
+
+.meetup-cancel-btn {
+	background: #D50000;
+}
+
+.meetup-ok-btn {
+	background: #2E7D32
+}
+
+.meetup-more-btn {
+	background: #1565C0
+}
+
+.meetup-wait {
+	display: none;
+}
+
+.meetup-wait.active {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: #000;
+	display: flex;
+}
+
+.meetup-wait h5 {
+	margin: auto;
+	font-size: 1rem;
+}
+
+/* Confirm meetup */
+
+.confirm-meetup {
+	display: none;
+	background: #000;
+	overflow: hidden;
+}
+
+.confirm-meetup.active {
+	display: flex;
+	flex-direction: column;
+}
+
+.confirm-meetup-description {
+	position: absolute;
+	color: #212121;
+	padding: 2% 5%;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.confirm-meetup-map {
+	object-fit: cover;
+	height: 100%;
+}
+
+.confirm-meetup .meetup-btn-container button {
+	flex: 1;
+	border: none;
+	border-left: 1px solid #f2f2f2;
+	font-weight: 600;
+	outline: none;
+	color: #f2f2f2;
+	cursor: pointer;
+	padding: 3%;
+}
+
+.confirm-meetup-cancel-btn {
+	background: #D50000;
+}
+
+.confirm-meetup-ok-btn {
+	background: #2E7D32
 }
 
 /* Navmode screen */

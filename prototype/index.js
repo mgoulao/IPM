@@ -564,7 +564,7 @@ class CreateReservation {
 		this.state = {
 			valid: true,
 			day: date.getDate(),
-			month: date.getMonth()+1,
+			month: date.getMonth() + 1,
 			year: date.getFullYear(),
 			people: "1",
 			hour: "08",
@@ -732,13 +732,13 @@ class CreateReservation {
 		let date = new Date();
 
 		daySelectElem.value = date.getDate();
-		monthSelectElem.value = date.getMonth()+1;
+		monthSelectElem.value = date.getMonth() + 1;
 		yearSelectElem.value = date.getFullYear();
 
 		this.state = {
 			valid: true,
 			day: date.getDate(),
-			month: date.getMonth()+1,
+			month: date.getMonth() + 1,
 			year: date.getFullYear(),
 			people: "1",
 			hour: "08",
@@ -822,6 +822,7 @@ class ContactManager {
 				locate: true,
 				receiveCall: true,
 				beLocated: true,
+				distance: 3.2,
 				messages: [],
 				added: true,
 			},
@@ -832,6 +833,7 @@ class ContactManager {
 				locate: true,
 				receiveCall: true,
 				beLocated: true,
+				distance: 3.8,
 				messages: [],
 				added: true,
 			},
@@ -841,6 +843,7 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
+				distance: 2.2,
 				beLocated: true,
 				messages: [],
 				added: false,
@@ -852,6 +855,7 @@ class ContactManager {
 				call: false,
 				receiveCall: true,
 				beLocated: true,
+				distance: 4.1,
 				messages: [],
 				added: false,
 			}, {
@@ -861,6 +865,7 @@ class ContactManager {
 				call: false,
 				receiveCall: true,
 				beLocated: true,
+				distance: 0.7,
 				messages: [],
 				added: false,
 			}, {
@@ -869,6 +874,7 @@ class ContactManager {
 				location: false,
 				call: false,
 				receiveCall: true,
+				distance: 0.2,
 				beLocated: true,
 				messages: [],
 			},
@@ -878,6 +884,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
+				distance: 3.2,
 				beLocated: true,
 				messages: [],
 				added: false,
@@ -888,6 +895,7 @@ class ContactManager {
 				call: true,
 				locate: true,
 				receiveCall: true,
+				distance: 3.4,
 				beLocated: true,
 				messages: [],
 				added: true,
@@ -899,6 +907,7 @@ class ContactManager {
 				locate: true,
 				receiveCall: true,
 				beLocated: true,
+				distance: 1.2,
 				messages: [],
 				added: true,
 			},
@@ -908,6 +917,7 @@ class ContactManager {
 				call: true,
 				receiveCall: true,
 				locate: true,
+				distance: 1.6,
 				beLocated: true,
 				messages: [],
 				added: true,
@@ -936,6 +946,10 @@ class ContactManager {
 						</div>
 						${e.added && e.receiveCall ?
 					'<i class="material-icons helper-add-message-btn">mic</i>'
+					: ''
+				}
+				${e.added && e.beLocated ?
+					'<i class="material-icons helper-add-meetup-btn">location_on</i>'
 					: ''
 				}
           </div>
@@ -1007,6 +1021,16 @@ class ContactManager {
 					this.close();
 				});
 			}
+		});
+
+		$(document).on("click", ".helper-add-meetup-btn", (e) => {
+			let id = e.originalEvent.path[2].getAttribute("id");
+			let contact = this.getContact(id);
+			let confirmMeetup = new ConfirmMeetup();
+			confirmMeetup.open(contact.name, () => { }, () => {
+				let navModeScreen = new NavMode();
+				navModeScreen.open(contact.distance);
+			});
 		});
 
 		$(document).on("click", ".helper-add-message-btn", (e) => {
@@ -1101,26 +1125,129 @@ class CallScreen {
 class PalFinder {
 	constructor() {
 		this.elem = document.querySelector(".pal-finder");
+		this.maps = [
+			"../files/marker1.png",
+			"../files/marker2.png",
+			"../files/marker3.png",
+			"../files/marker4.png",
+			"../files/marker5.png"
+		];
 		this.navModeScreen = new NavMode();
-
+		this.meetupScreen = new CreateMeetup();
+		this.contact;
 		this.setupListeners();
 	}
 
 	setupListeners() {
 		let closeBtn = document.querySelector(".close-pal-finder-btn");
 		let goBtn = document.querySelector(".pal-finder-start-btn");
+		let createMeetupBtn = document.querySelector(".meetup-btn");
 
 		closeBtn.addEventListener("click", () => {
 			this.close();
 		});
 
 		goBtn.addEventListener("click", () => {
-			this.navModeScreen.open();
+			this.navModeScreen.open(this.contact.distance);
+		});
+
+
+
+		createMeetupBtn.addEventListener("click", () => {
+			this.meetupScreen.open(this.contact.name, "../files/map1.png", () => { }, () => {
+				let wait = document.querySelector(".meetup-wait");
+				wait.classList.add("active");
+
+				setTimeout(() => {
+					this.navModeScreen.open(this.contact.distance);
+					this.close();
+					this.meetupScreen.close();
+				}, 4000);
+			});
 		});
 
 	}
 
-	open() {
+	open(contact) {
+		let distance = document.querySelector(".pal-finder-distance");
+		let map = document.querySelector(".pal-finder-map");
+
+		distance.innerHTML = `${contact.distance} Km`;
+		map.src = this.maps[Math.floor(Math.random() * this.maps.length)];
+
+		this.contact = contact;
+		this.elem.classList.add("active");
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+	}
+
+}
+
+class ConfirmMeetup {
+	constructor() {
+		this.elem = document.querySelector(".confirm-meetup");
+		this.maps = [
+			"../files/marker1.png",
+			"../files/marker2.png",
+			"../files/marker3.png",
+			"../files/marker4.png",
+			"../files/marker5.png"
+		];
+	}
+
+	open(name, cancelCallback, confirmCallback) {
+		let cancelBtn = document.querySelector(".confirm-meetup-cancel-btn");
+		let confirmBtn = document.querySelector(".confirm-meetup-ok-btn");
+
+		let descriptionElem = document.querySelector(".confirm-meetup-description");
+		let mapElem = document.querySelector(".confirm-meetup-map");
+
+		descriptionElem.innerHTML = `Meet ${name} at this place?`;
+		mapElem.src = this.maps[Math.floor(Math.random() * this.maps.length)];
+
+		cancelBtn.addEventListener("click", () => { this.close(); cancelCallback(); });
+		confirmBtn.addEventListener("click", () => { this.close(); confirmCallback(); })
+
+		this.elem.classList.add("active");
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+	}
+
+}
+
+class CreateMeetup {
+	constructor() {
+		this.elem = document.querySelector(".create-meetup");
+		this.maps = [
+			"../files/marker1.png",
+			"../files/marker2.png",
+			"../files/marker3.png",
+			"../files/marker4.png",
+			"../files/marker5.png"
+		];
+	}
+
+	open(name, img, cancelCallback, confirmCallback) {
+		let cancelBtn = document.querySelector(".meetup-cancel-btn");
+		let confirmBtn = document.querySelector(".meetup-ok-btn");
+		let moreBtn = document.querySelector(".meetup-more-btn");
+
+		let descriptionElem = document.querySelector(".meetup-description");
+		let mapElem = document.querySelector(".meetup-map");
+
+		descriptionElem.innerHTML = `Meet ${name} at this place?`;
+		mapElem.src = this.maps[Math.floor(Math.random() * this.maps.length)];
+
+		cancelBtn.addEventListener("click", () => { this.close(); cancelCallback(); });
+		confirmBtn.addEventListener("click", () => { confirmCallback(); })
+		moreBtn.addEventListener("click", () => {
+			mapElem.src = this.maps[Math.floor(Math.random() * this.maps.length)];
+		})
+
 		this.elem.classList.add("active");
 	}
 
@@ -1192,7 +1319,9 @@ class Contacts {
 		});
 
 		$(document).on('click', '.location-btn', (e) => {
-			this.palFinderScreen.open();
+			let id = e.originalEvent.path[3].getAttribute("id");
+			let contact = this.contactManager.getContact(id);
+			this.palFinderScreen.open(contact);
 		});
 
 		$(document).on('click', '.message-btn', (e) => {
@@ -1321,7 +1450,7 @@ class NavMode {
 		let distanceElem = document.querySelector(".navmode-footer span");
 		let mapElem = document.querySelector(".dummy-map");
 
-		mapElem.src = this.maps[Math.floor(Math.random()*this.maps.length)];
+		mapElem.src = this.maps[Math.floor(Math.random() * this.maps.length)];
 
 		this.elem.classList.add("active");
 
