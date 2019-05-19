@@ -910,6 +910,51 @@ ul {
 	margin-right: 12px;
 }
 
+.edit-contacts-btn {
+	cursor: pointer;
+}
+
+/* Edit Contacts */
+
+.edit-contacts {
+	display: none;
+	background: #000;
+	overflow-y: overlay;
+}
+
+.edit-contacts.active {
+	display: block;
+}
+
+.edit-contacts-list span {
+	flex: 1;
+	align-self: center;
+}
+
+.contacts-list {
+	margin: 0;
+	margin-bottom: 12px;
+	padding: 0;
+	list-style: none;
+}
+
+.edit-contacts-list li {
+	display: flex;
+	padding: 6px 12px;
+	margin: 6px 12px;
+	border-radius: 8px;
+	box-sizing: border-box;
+	background: #242424;
+}
+
+.edit-contacts-list .list-btn-container {
+	display: flex;
+}
+
+.edit-contacts-list .list-btn-container .list-btn:first-child {
+	margin-right: 4px;
+}
+
 /* Pal Finder */
 
 .pal-finder {
@@ -963,7 +1008,7 @@ ul {
 	width: 100%;
 	display: flex;
 	background: #242424;
-	padding: 2% 8%;
+	padding: 2% 4%;
 	z-index: 1;
 }
 
@@ -1001,11 +1046,12 @@ ul {
 .meetup-btn {
 	border: none;
 	outline: none;
-	background: #1E88E5;
+	background: #c07014;
 	padding: 6px 18px;
 	margin: auto;
 	font-size: 1rem;
 	border-radius: 14px;
+	margin-right: 4%;
 	color: #fff;
 	cursor: pointer;
 }
@@ -1031,6 +1077,7 @@ ul {
 	position: absolute;
 	color: #212121;
 	padding: 2% 5%;
+	margin-right: 4%;
 	font-size: 1rem;
 	font-weight: 600;
 }
@@ -1387,6 +1434,25 @@ ul {
 	border-radius: 14px;
 	color: #fff;
 	cursor: pointer;
+}
+
+
+.clicks {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	padding: 12px;
+	border-radius: 14px;
+	background: #f2f2f2;
+}
+
+.clicks-container {
+	display: flex;
+}
+.clicks h5 {
+	font-size: 1rem;
+	color: #000;
+
 }
 
 @media screen and (max-width: 600px) {

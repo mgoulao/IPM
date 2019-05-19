@@ -640,8 +640,6 @@ class CreateReservation {
 
 		this.checkDate();
 
-		this.createHoursOptions();
-
 		this.updatePrice();
 	}
 
@@ -1075,6 +1073,11 @@ class ContactManager {
 		return res;
 	}
 
+	removeContact(id) {
+		let contact = this.getContact(id);
+		contact.added = false;
+	}
+
 	getContacts() {
 		return this.contacts;
 	}
@@ -1266,6 +1269,7 @@ class Contacts {
 		this.contactManager = new ContactManager(this);
 		this.callScreen = new CallScreen();
 		this.palFinderScreen = new PalFinder();
+		this.editContactsScreen = new EditContacts(this.contactManager, this);
 		this.createListElem();
 	}
 
@@ -1313,6 +1317,7 @@ class Contacts {
 
 	setupListeners() {
 		let addContactBtn = document.querySelector(".add-contact-btn");
+		let editContactsBtn = document.querySelector(".edit-contacts-btn");
 
 		$(document).on('click', '.phone-btn', (e) => {
 			this.openCallScreen(e.originalEvent.path[3].getAttribute("id"));
@@ -1344,6 +1349,15 @@ class Contacts {
 		addContactBtn.addEventListener("click", () => {
 			this.openAddContactScreen();
 		});
+
+		editContactsBtn.addEventListener("click", () => {
+			this.editContactsScreen.open();
+		});
+	}
+
+	removeContact(id) {
+		this.contactManager.removeContact(id);
+		this.createListElem();
 	}
 
 	sendReponse(contact) {
@@ -1358,8 +1372,71 @@ class Contacts {
 
 }
 
-class MessageScreen {
+class EditContacts {
 
+	constructor(contactManager, contactScreen) {
+		this.elem = document.querySelector(".edit-contacts");
+		this.setupListeners();
+		this.contactScreen = contactScreen;
+		this.contactManager = contactManager;
+		this.createListElem();
+		this.confirmScreen = new ConfirmScreen();
+	}
+
+	createListElem() {
+		let listElems = "";
+		let list = this.contactManager.getContacts();
+		list.forEach((e) => {
+			if (e.added) {
+				listElems +=
+					`<li id="${e.id}">
+            <span>${e.name}</span>
+						<div class="list-btn-container">
+            	<div class="list-btn">
+								<i class="material-icons remove-btn">delete_outlined</i>
+              </div>
+            </div>
+          </li>`;
+			}
+		});
+		let contactsList = document.querySelector(".edit-contacts-list");
+		contactsList.innerHTML = listElems;
+	}
+
+	open() {
+		this.elem.classList.add("active");
+	}
+
+	close() {
+		this.elem.classList.remove("active");
+	}
+
+	setupListeners() {
+		let closeBtn = document.querySelector(".close-edit-contacts-btn");
+
+		closeBtn.addEventListener("click", () => {
+			this.close();
+		})
+
+		$(document).on('click', '.remove-btn', (e) => {
+			this.removeContact(e.originalEvent.path[3].getAttribute("id"));
+		});
+	}
+
+	removeContact(id) {
+
+		let name = this.contactManager.getContact(id).name;
+		this.confirmScreen.open(`Do you want to remove ${name} from contacts?`, "", () => { }, () => {
+			this.contactScreen.removeContact(id);
+			this.createListElem();
+		});
+
+
+	}
+
+}
+
+class MessageScreen {
 
 	constructor() {
 		this.elem = document.querySelector(".message");
@@ -1414,8 +1491,10 @@ class ConfirmScreen {
 		descriptionElem.innerHTML = description;
 		textElem.innerHTML = text;
 
-		cancelBtn.addEventListener("click", () => { this.close(); cancelCallback(); });
-		confirmBtn.addEventListener("click", () => { this.close(); confirmCallback(); })
+		let confirmFunc = () => { this.close(); confirmCallback(); };
+
+		confirmBtn.addEventListener("click", confirmFunc);
+		cancelBtn.addEventListener("click", () => { this.close(); cancelCallback(); confirmBtn.removeEventListener("click", confirmFunc) });
 
 		this.elem.classList.add("active");
 	}
@@ -1462,9 +1541,34 @@ class NavMode {
 	}
 }
 
+class Clicks {
+	constructor() {
+		this.elem = document.getElementById("clicks");
+		this.clicks = 0;
+		this.counter = document.querySelector(".counter");
+		this.counter.innerHTML = 0;
+		this.setupListeners();
+	}
+
+	setupListeners() {
+		let clearBtn = document.querySelector(".clicks-clear");
+		document.querySelector(".device").addEventListener("click", () => {
+			this.counter.innerHTML = ++this.clicks;
+		});
+
+		clearBtn.addEventListener("click", () => {
+			this.clicks = 0;
+			this.counter.innerHTML = this.clicks;
+
+		})
+	}
+}
+
 window.onload = () => {
 	let clock = new Clock();
 	let contacts = new Contacts();
 	let places = new Places();
 	let swipe = new Swipe();
+
+	let clicks = new Clicks();
 }
