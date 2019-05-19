@@ -66,9 +66,21 @@
 			<div class="menu-item contacts">
 				<div class="contacts-header">
 					<span>Contacts</span>
+					<i class="edit-contacts-btn material-icons">edit_outlined</i>
 					<i class="add-contact-btn material-icons">add</i>
 				</div>
 				<ul class="contacts-list">
+					<!-- List elems -->
+				</ul>
+			</div>
+
+			<div class="menu-item edit-contacts">
+				<div class="edit-contacts-header">
+					<i class="material-icons close-edit-contacts-btn close-btn">close</i>
+
+					<span class="screen-title">Edit</span>
+				</div>
+				<ul class="edit-contacts-list">
 					<!-- List elems -->
 				</ul>
 			</div>
@@ -386,11 +398,9 @@
 							<i class="material-icons">arrow_upward</i>
 							<span class="pal-finder-distance">0.4 Km</span>
 						</div>
+						<button class="meetup-btn">meetup</button>
 						<button class="pal-finder-start-btn">GO</button>
 					</div>
-				</div>
-				<div class="meetup-container">
-					<button class="meetup-btn">Create meetup</button>
 				</div>
 			</div>
 		</div>
@@ -458,6 +468,16 @@
 				<button class="confirm-ok-btn">Yes</button>
 			</div>
 		</div>
+
+	</div>
+	<!-- End Device -->
+
+	<div class="clicks">
+		<div class="clicks-container">
+			<h5>Clicks:</h5>
+			<h5 class="counter"></h5>
+		</div>
+		<button class="clicks-clear">Clear</button>
 	</div>
 
 	<script src="../libraries/jquery.min.js"></script>
